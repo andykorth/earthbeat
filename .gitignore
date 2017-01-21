@@ -1,0 +1,50 @@
+ProjectSettings/ProjectSettings.asset
+ProjectSettings/ProjectVersion.txt
+Assets/Prefabs/+CachedContent.prefab
+
+# Unity generated #
+# =============== #
+Temp/
+Obj/
+UnityGenerated/
+Library/
+WWiseProject/GG/GeneratedSoundBanks
+WWiseProject/GG/.cache
+WWiseProject/GG/.backup
+Assets/StreamingAssets/Audio/GeneratedSoundBanks
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+*.svd
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.user
+*.unityproj
+*.booproj
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+
+Assets/Game/Lightmap-0_comp_dir.exr
+Assets/Game/Lightmap-0_comp_dir.exr.meta
+Assets/Game/Lightmap-0_comp_light.exr
+Assets/Game/Lightmap-0_comp_light.exr.meta
+Assets/Game/LightmapSnapshot.asset
+Assets/Game/LightmapSnapshot.asset.meta
+Assets/Game/ReflectionProbe-0.exr
+Assets/Game/ReflectionProbe-0.exr.meta
