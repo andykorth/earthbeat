@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4107637265625988}
   - component: {fileID: 114106049630642542}
+  - component: {fileID: 114847369410770262}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -54,3 +55,14 @@ MonoBehaviour:
   couchPlayerPrefab: {fileID: 1589397135839712, guid: b00a67b427d7540de97685fb5937fd04,
     type: 2}
   spawnPoint: {fileID: 0}
+--- !u!114 &114847369410770262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1117296507973956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88260b378c6a84b1b8d1068e5a69cd6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
