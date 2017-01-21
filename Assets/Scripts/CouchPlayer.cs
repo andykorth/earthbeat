@@ -28,15 +28,16 @@ public class CouchPlayer : MonoBehaviour {
 		} else {
 			Debug.Log ("PlayerID: " + playerNum + " ready to fly! Name: " + player.name);
 		}
+
 	}
 
+	private Quaternion baseRotation;
 
 	void FixedUpdate() {
 		// Physics / Motion updates are best suited for the Fixed Update loop
 
-
-        float moveHorizontal = player.GetAxis("Horiz");
-		float moveVertical = player.GetAxis("Vert");
+		float moveHorizontal = player.GetAxis("Horiz") * horizontalRotationSpeed * Time.deltaTime;
+		float moveVertical = player.GetAxis("Vert") * verticalRotationSpeed * Time.deltaTime;
 		//Debug.Log("Player " + playerNum + " Horizontal " + moveHorizontal);
 		//Debug.Log("Player " + playerNum + " Vertical " + moveVertical);
 
@@ -46,7 +47,14 @@ public class CouchPlayer : MonoBehaviour {
             Fire();
         }
 
-		this.transform.Rotate (new Vector3 (verticalRotationSpeed * moveVertical, 0f, horizontalRotationSpeed * moveHorizontal) * Time.deltaTime );
+		float roll = moveVertical;
+
+		baseRotation = transform.rotation * Quaternion.Euler(0, moveVertical, moveHorizontal);
+		// dampen the yaw:
+//		Quaternion level = Quaternion.LookRotation(target * Vector3.forward);
+//		target = Quaternion.Slerp (target, level, 0.5f);
+
+		transform.rotation = baseRotation;
 
 		// We probably want to vary the speed, but for now it's constant:
 		float planeCurrentSpeed = 5.0f;
