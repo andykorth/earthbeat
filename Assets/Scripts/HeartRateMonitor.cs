@@ -11,18 +11,18 @@ public class HeartRateMonitor : MonoBehaviour
 
 	public static UnityEvent heartbeatEvent;
 	public static int heartRate;
-	private static float timeSinceLastHeartbeat = 0;
-	//private static Text testText;
+	private static float timeSinceLastHeartbeat;
+	private static AudioSource heartbeatAudio;
 
 	void Start()
 	{
-		heartRate = 70;
+		heartRate = 60;
+		timeSinceLastHeartbeat = 0;
 
 		heartbeatEvent = new UnityEvent();
 
-		//GameObject text = GameObject.FindGameObjectWithTag("TestText");
-		//testText = text.GetComponent<Text>();
-		//testText.text = heartRate.ToString();
+		GameObject gameObject = GameObject.FindGameObjectWithTag("HRM");
+		heartbeatAudio = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Counts up from the last heartbeat
@@ -34,9 +34,9 @@ public class HeartRateMonitor : MonoBehaviour
 			ReceiveChangeOfRate(-10);
 
 		timeSinceLastHeartbeat += Time.deltaTime;
-		if (timeSinceLastHeartbeat > heartRate/60)
+		if (timeSinceLastHeartbeat > 60.0/heartRate)
 		{
-			timeSinceLastHeartbeat = 0;
+			timeSinceLastHeartbeat = (float) (timeSinceLastHeartbeat % (60.0/heartRate));
 			BroadcastHeartbeat();
 		}
 	}
@@ -45,18 +45,17 @@ public class HeartRateMonitor : MonoBehaviour
 	public static void ReceiveRate(int rate)
 	{
 		heartRate = rate;
-		//testText.text = heartRate.ToString();
 	}
 
 	// Adds the passed value to the current heart rate.
 	public static void ReceiveChangeOfRate(int delta)
 	{
 		heartRate = (heartRate + delta > 0) ? heartRate + delta : 1;
-		//testText.text = heartRate.ToString();
 	}
 
 	public static void BroadcastHeartbeat() // this might be better as private
 	{
 		heartbeatEvent.Invoke();
+		heartbeatAudio.Play();
 	}
 }
