@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
     public GameObject couchPlayerPrefab;
     public GameObject spawnPoint;
 
-    public CouchPlayer[] couchPlayers;
+    private CouchPlayer[] couchPlayers;
     private int lastJoysticks;
 
     void Start() {
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
         if (newJoysticks.Length > lastJoysticks) {
             lastJoysticks = newJoysticks.Length;
             for (var i = 0; i < newJoysticks.Length; i++) {
-                if (couchPlayers[i] == null || !couchPlayers[i].inited) {
+                if (couchPlayers[i] == null) {
                     CouchPlayer player = SetupNewCouchPlayer(i);
                     couchPlayers[i] = player;
                 }
@@ -31,7 +31,6 @@ public class GameManager : MonoBehaviour {
         GameObject newPlayerObject = Instantiate(couchPlayerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
         var couchPlayer = newPlayerObject.GetComponent<CouchPlayer>();
         couchPlayer.playerNum = num;
-        couchPlayer.Setup();
         return couchPlayer;
     }
 }

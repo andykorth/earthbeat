@@ -5,11 +5,7 @@ using UnityEngine;
 public class CouchPlayer : MonoBehaviour {
     public Projectile projectile;
     public int playerNum;
-    public bool inited;
 
-    public void Setup() {
-        inited = true;
-    }
     void Update() {
         Debug.Log(Input.GetAxis("Horizontal" + playerNum));
         Debug.Log(Input.GetAxis("Vertical" + playerNum));
@@ -28,7 +24,6 @@ public class CouchPlayer : MonoBehaviour {
         if (moveVertical > 0) {
 
         }
-
 
     }
 

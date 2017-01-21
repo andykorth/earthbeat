@@ -345,7 +345,11 @@ MonoBehaviour:
   couchPlayerPrefab: {fileID: 1589397135839712, guid: b00a67b427d7540de97685fb5937fd04,
     type: 2}
   spawnPoint: {fileID: 48390311}
-  couchPlayers: []
+  couchPlayers:
+  - {fileID: 114852710331148974, guid: b00a67b427d7540de97685fb5937fd04, type: 2}
+  - {fileID: 114852710331148974, guid: b00a67b427d7540de97685fb5937fd04, type: 2}
+  - {fileID: 114852710331148974, guid: b00a67b427d7540de97685fb5937fd04, type: 2}
+  - {fileID: 114852710331148974, guid: b00a67b427d7540de97685fb5937fd04, type: 2}
 --- !u!1 &758606976
 GameObject:
   m_ObjectHideFlags: 0

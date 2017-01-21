@@ -14,4 +14,7 @@ public class Projectile : MonoBehaviour {
         GetComponent<Rigidbody>().AddForce(startPosition * speed);
     }
 
+    public void Fire(Vector3 startPosition, float customSpeed) {
+        GetComponent<Rigidbody>().AddForce(startPosition * customSpeed);
+    }
 }
