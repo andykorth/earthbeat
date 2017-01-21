@@ -17,9 +17,6 @@ namespace Rewired.Integration.UnityUI {
     [AddComponentMenu("Event/Rewired Standalone Input Module")]
     public class RewiredStandaloneInputModule : PointerInputModule {
         
-		public bool mouseAlsoSetsSelection = true;
-
-
         #region Rewired Variables and Properties
 
         private const string DEFAULT_ACTION_MOVE_HORIZONTAL = "UIHorizontal";
@@ -357,7 +354,6 @@ namespace Rewired.Integration.UnityUI {
             return shouldActivate;
         }
 
-
         public override void ActivateModule() {
             base.ActivateModule();
 
@@ -436,9 +432,7 @@ namespace Rewired.Integration.UnityUI {
                 pointerEvent.pressPosition = pointerEvent.position;
                 pointerEvent.pointerPressRaycast = pointerEvent.pointerCurrentRaycast;
 
-				if (!mouseAlsoSetsSelection) {
-					DeselectIfSelectionChanged (currentOverGo, pointerEvent);
-				}
+                DeselectIfSelectionChanged(currentOverGo, pointerEvent);
 
                 if(pointerEvent.pointerEnter != currentOverGo) {
                     // send a pointer enter to the touched element if it isn't the one to select...
@@ -730,9 +724,7 @@ namespace Rewired.Integration.UnityUI {
                 pointerEvent.pressPosition = pointerEvent.position;
                 pointerEvent.pointerPressRaycast = pointerEvent.pointerCurrentRaycast;
 
-				if (!mouseAlsoSetsSelection) {
-					DeselectIfSelectionChanged (currentOverGo, pointerEvent);
-				}
+                DeselectIfSelectionChanged(currentOverGo, pointerEvent);
 
                 // search for the control that will receive the press
                 // if we can't find a press handler set the press
@@ -758,9 +750,6 @@ namespace Rewired.Integration.UnityUI {
                 } else {
                     pointerEvent.clickCount = 1;
                 }
-				if (newPressed != null && mouseAlsoSetsSelection) {
-					this.eventSystem.SetSelectedGameObject(newPressed);
-				}
 
                 pointerEvent.pointerPress = newPressed;
                 pointerEvent.rawPointerPress = currentOverGo;

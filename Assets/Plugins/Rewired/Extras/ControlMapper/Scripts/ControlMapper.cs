@@ -2625,15 +2625,8 @@ namespace Rewired.UI.ControlMapper {
         }
         private void Open(bool force) {
             if(!initialized) Initialize();
-			if(!initialized) {
-				Debug.LogWarning ("Failed to init");
-				return; // failed to init
-			}
-			if (!force && isOpen) {
-				Debug.LogWarning ("no open!");
-				return;
-
-			}
+            if(!initialized) return; // failed to init
+            if(!force && isOpen) return;
             Clear();
             canvas.SetActive(true);
             OnPlayerSelected(0, false);

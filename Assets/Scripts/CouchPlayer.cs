@@ -2,30 +2,62 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Rewired;
+
 public class CouchPlayer : MonoBehaviour {
     public Projectile projectile;
     public int playerNum;
 
-    void Update() {
-        Debug.Log(Input.GetAxis("Horizontal" + playerNum));
-        Debug.Log(Input.GetAxis("Vertical" + playerNum));
-        float moveHorizontal = Input.GetAxis ("Horizontal");
-        float moveVertical = Input.GetAxis ("Vertical");
+	public float verticalRotationSpeed = 1.0f;
+	public float horizontalRotationSpeed = 1.0f;
+
+	// The Rewired Player, used for input for this specific controller.
+	private Player player;
 
 
-        if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2") || Input.GetButtonDown("Fire3")) {
+	public void Awake(){
+		player = ReInput.players.GetPlayer(playerNum);
+
+
+		if (player == null || !player.isPlaying) {
+			// no controller for this player, delete them.
+			Debug.Log ("No controller found for playerID: " + playerNum + " Removing their fighter plane.");
+			Destroy (this.gameObject);
+			return;
+		} else {
+			Debug.Log ("PlayerID: " + playerNum + " ready to fly! Name: " + player.name);
+		}
+	}
+
+
+	void FixedUpdate() {
+		// Physics / Motion updates are best suited for the Fixed Update loop
+
+
+        float moveHorizontal = player.GetAxis("Horiz");
+		float moveVertical = player.GetAxis("Vert");
+		Debug.Log("Player " + playerNum + " Horizontal " + moveHorizontal);
+		Debug.Log("Player " + playerNum + " Vertical " + moveVertical);
+
+		bool fire = player.GetButtonDown("Fire");
+
+		if (fire) {
             Fire();
         }
 
-        if (moveHorizontal > 0) {
+		this.transform.Rotate (new Vector3 (verticalRotationSpeed * moveVertical, 0f, horizontalRotationSpeed * moveHorizontal) * Time.deltaTime );
 
-        }
-
-        if (moveVertical > 0) {
-
-        }
+		// We probably want to vary the speed, but for now it's constant:
+		float planeCurrentSpeed = 1.0f;
+		// Also, if we want physics interaction, we should be setting a rigid body's velocity, rather than modifying the
+		// position directly
+		transform.position += this.transform.forward * planeCurrentSpeed * Time.deltaTime;
 
     }
+
+	public void Update(){
+		// Visual effects run in the update loop.
+	}
 
     public IEnumerator _TestFire() {
         while (true) {
