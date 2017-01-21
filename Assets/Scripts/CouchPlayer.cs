@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +15,8 @@ public class CouchPlayer : MonoBehaviour {
 	private Player player;
 
 
-	public void Awake(){
+	public void SetupController(int playerNum) {
+	    this.playerNum = playerNum;
 		player = ReInput.players.GetPlayer(playerNum);
 
 
@@ -36,8 +37,8 @@ public class CouchPlayer : MonoBehaviour {
 
         float moveHorizontal = player.GetAxis("Horiz");
 		float moveVertical = player.GetAxis("Vert");
-		Debug.Log("Player " + playerNum + " Horizontal " + moveHorizontal);
-		Debug.Log("Player " + playerNum + " Vertical " + moveVertical);
+		//Debug.Log("Player " + playerNum + " Horizontal " + moveHorizontal);
+		//Debug.Log("Player " + playerNum + " Vertical " + moveVertical);
 
 		bool fire = player.GetButtonDown("Fire");
 
@@ -48,7 +49,7 @@ public class CouchPlayer : MonoBehaviour {
 		this.transform.Rotate (new Vector3 (verticalRotationSpeed * moveVertical, 0f, horizontalRotationSpeed * moveHorizontal) * Time.deltaTime );
 
 		// We probably want to vary the speed, but for now it's constant:
-		float planeCurrentSpeed = 1.0f;
+		float planeCurrentSpeed = 5.0f;
 		// Also, if we want physics interaction, we should be setting a rigid body's velocity, rather than modifying the
 		// position directly
 		transform.position += this.transform.forward * planeCurrentSpeed * Time.deltaTime;
@@ -58,13 +59,6 @@ public class CouchPlayer : MonoBehaviour {
 	public void Update(){
 		// Visual effects run in the update loop.
 	}
-
-    public IEnumerator _TestFire() {
-        while (true) {
-            Fire();
-            yield return new WaitForSeconds(3);
-        }
-    }
 
     public void Fire() {
         Instantiate(projectile, transform.position, transform.rotation).Fire(transform.forward);
