@@ -19,12 +19,12 @@ public class AudioManager : SingletonScript<AudioManager> {
 		PlayRandom (slaps);
 	}
 
-	public void PlayRandom(AudioClip[] all){
+	public void PlayRandom(AudioClip[] all, float pitchBend = 1.0f, float vol = 1.0f){
 		if (all == null) {
 			return;
 		}
 		AudioClip c = all[Random.Range(0, all.Length)];
-		PlayClip (c);	
+		PlayClip (c, pitchBend, vol);	
 	}
 
 	private float nextSound = 0;
