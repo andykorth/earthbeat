@@ -52,9 +52,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7ac2b1ccd3d4300bd60da33a57c0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  couchPlayerPrefab: {fileID: 1961952920791274, guid: 43c559299a15b4660be8a39564008cc7,
+  couchPlayerPrefab: {fileID: 1709136670007658, guid: 1b95c87e84cf84183b66dca4ea211e5b,
     type: 2}
   spawnPoint: {fileID: 0}
+  maxPlayers: 4
+  _VRPlayer: {fileID: 0}
 --- !u!114 &114847369410770262
 MonoBehaviour:
   m_ObjectHideFlags: 1
