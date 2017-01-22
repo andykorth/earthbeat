@@ -11,8 +11,10 @@ public class PolypController : MonoBehaviour {
 	[Header("Extensions")]
 	public Transform leftStickyHand;
 	public Transform rightStickyHand;
+	public Transform tongue;
 
 	[Header("Rigged model nodes")]
+	public Transform tongueNode;
 	public Transform headNode;
 	public Transform leftArmNode;
 	public Transform leftHandNode;
@@ -32,6 +34,7 @@ public class PolypController : MonoBehaviour {
 		playerNode.rotation = Quaternion.Euler (0, head.rotation.eulerAngles.y, 0);
 
 		headNode.rotation = head.transform.rotation;
+		tongueNode.position = tongue.position;
 
 		leftArmNode.position = leftController.position;
 		leftArmNode.rotation = leftController.rotation;
