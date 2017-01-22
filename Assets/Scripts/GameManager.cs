@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
                 _instance = FindObjectOfType (typeof(GameManager)) as GameManager;
                 if (_instance == null) {
                     GameObject obj = new GameObject ("GameManager", typeof(GameManager));
-                    print ("Could not find an GameManager object in the scene. Object was auto-generated.");
+					Debug.Log ("Could not find an GameManager object in the scene. Object was auto-generated. " + obj);
                 }
             }
 
@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour {
         var couchPlayer = newPlayerObject.GetComponent<CouchPlayer>();
         couchPlayer.SetupController(num);
 		couchPlayer.SetColor (playerColors [num]);
+
+		AudioManager.i.PlayerStart ();
+
         return couchPlayer;
     }
 
