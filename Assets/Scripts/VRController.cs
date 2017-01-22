@@ -68,7 +68,7 @@ public class VRController : MonoBehaviour {
 		if (canFire && avgAcceleration > 1.5f) {
 			nextFireTime = Time.time + 0.5f;
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
-			canFire = false;
+			//canFire = false;
 		}
 
 		if (avgVelocity > 2f && Time.time > nextFireTime) { // check to see if the VR player can fire
