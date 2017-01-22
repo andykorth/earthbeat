@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour {
         get { return _VRPlayer; }
     }
 
+	public int VRPlayerHitPoints = 500;
+	public int droneDeaths = 0;
+	public int droneLandings = 0;
+
     #region Singleton Code
     private static GameManager _instance = null;
 
@@ -50,6 +54,20 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
+
+	public void DroneDied(){
+		droneDeaths += 1;
+		DroneUIManager.i.UpdateUI (droneDeaths, droneLandings);
+	}
+
+	public void DroneLanded(){
+		droneLandings += 1;
+		DroneUIManager.i.UpdateUI (droneDeaths, droneLandings);
+	}
+
+	public void VRPlayerTookDamage(){
+		VRPlayerHitPoints -= 1;
+	}
 
     void AssignNextPlayer(int rewiredPlayerId) {
         if(playerMap.Count >= maxPlayers) {

@@ -151,6 +151,8 @@ public class CouchPlayer : MonoBehaviour {
         Destroy(go, 4);
         this.gameObject.transform.Find("Ship_Fixed_01").gameObject.SetActive(false);
         StartRespawnTimer();
+
+		GameManager.Instance.DroneDied ();
     }
 
     private void StartRespawnTimer() {
