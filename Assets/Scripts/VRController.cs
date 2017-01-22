@@ -17,9 +17,10 @@ public class VRController : MonoBehaviour {
 	private SteamVR_TrackedController trackedController;
 
 	private const int FRAMECOUNT = 90;
-	private float FIRESTRENGTH = 150f;
-	private bool isEnlarged;
-	private float enlargedTime;
+	private float FIRESTRENGTH = 75f;
+
+	private float enlargedSize;
+	private float enlargementSpeed;
 
 	private void Awake() {
 		trackedController = gameObject.AddComponent<SteamVR_TrackedController> ();
@@ -60,13 +61,21 @@ public class VRController : MonoBehaviour {
 
 		float avgVelocity = velocitySum.magnitude / FRAMECOUNT, avgAcceleration = accelerationSum.magnitude / FRAMECOUNT;
 
-		if (isEnlarged && enlargedTime + 1.5f > Time.time) {
-			handModelTransform.localScale = new Vector3 (1f, 1f, 1f);
-			isEnlarged = false;
+
+		handModelTransform.localScale = new Vector3 (enlargedSize, enlargedSize, enlargedSize);
+		enlargedSize += enlargementSpeed;
+		if (enlargedSize > 10f) {
+			enlargedSize = 10f;
+			enlargementSpeed -= .1f;
+		} else if (enlargedSize < 1f) {
+			enlargedSize = 1f;
+		} else {
+			enlargementSpeed -= .1f;
 		}
 
 		if (canFire && avgAcceleration > 1.0f) {
 			nextFireTime = Time.time + 0.5f;
+			enlargementSpeed = 1f;
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
 			//canFire = false;
 		}
@@ -80,9 +89,6 @@ public class VRController : MonoBehaviour {
 
 	private void OnFire(Vector3 projectileSpeed) {
 		stickyHand.velocity = projectileSpeed;
-		handModelTransform.localScale = new Vector3 (10f, 10f, 10f);
-		isEnlarged = true;
-		enlargedTime = Time.time;
 
 		//AudioManager.i.PlaySlap ();
 	}
