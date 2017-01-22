@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Soundtrack : MonoBehaviour {
+public class Soundtrack : Script {
 	private AudioSource[] audioSources;
 	private int currentTrack = 0;
 	private const float CROSSFADETIME = 5f;
@@ -10,23 +10,24 @@ public class Soundtrack : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		audioSources = transform.GetComponentsInChildren<AudioSource> ();
+
+		// Play first track immediately.
 		audioSources [currentTrack].Play ();
-		StartCoroutine (PlayNextTrack ());
+		audioSources [currentTrack].volume = 1.0f;
 	}
 
-	IEnumerator PlayNextTrack() {
-		while (true) {
-			yield return new WaitForSeconds (audioSources [currentTrack].clip.length - CROSSFADETIME);
+	public void PlayNextTrack() {
+		int current = currentTrack;
+		int nextTrack = currentTrack + 1;
 
-			//float fadeTime = Time.time;
+		audioSources[nextTrack].Play();
 
-			//while (
-
-			currentTrack = (currentTrack + 1) % audioSources.Length;
-			audioSources [currentTrack].Play ();
-		}
+		var c = AddAnimation (CROSSFADETIME, (a) => {
+			audioSources[current].volume = 1-a;
+			audioSources[nextTrack].volume = a;
+		});
+		AddDelayed (c, () => audioSources [current].Stop ());
 	}
-
 
 
 }
