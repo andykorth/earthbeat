@@ -9,6 +9,8 @@ public class ParticleManager : SingletonScript<ParticleManager> {
 	public GameObject tinyExplosion;
 	public GameObject residualSmoke;
 	public GameObject plasmaExplosion;
+	public GameObject muzzleEffect;
+	public GameObject muzzleSparks;
 
 	public GameObject bloodImpact;
 }

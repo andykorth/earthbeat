@@ -9,8 +9,9 @@ public class CouchPlayer : MonoBehaviour {
 
     public Projectile projectile;
     public int playerNum;
-    public GameObject spawnPosition;
-    public GameObject explosion;
+	public GameObject spawnPosition1;
+	public GameObject spawnPosition2;
+	public GameObject explosion;
 
 	public float verticalRotationSpeed = 2.0f;
 	public float horizontalRotationSpeed = 4.0f;
@@ -117,14 +118,21 @@ public class CouchPlayer : MonoBehaviour {
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
     }
 
+	private bool useSpawnPoint1 = true;
     public void Fire() {
         shotChamber = shotChamber - 1;
         canShoot = false;
         ShootInterval();
         AudioManager.i.PlayLaser ();
-        Vector3 direction = -spawnPosition.transform.forward;//spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
+		Transform spawn = useSpawnPoint1 ? spawnPosition1.transform : spawnPosition2.transform;
+		useSpawnPoint1 = !useSpawnPoint1;
+
+		Destroy (Instantiate (ParticleManager.i.muzzleSparks, spawn.position, spawn.rotation), 2f);
+
+		Vector3 direction = spawn.forward; //Get a direction vector to fire the bullet at.
         //direction.Normalize(); // direction vector normalized to magnitude 1
-        Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
+		Instantiate(projectile, spawn.position, spawn.rotation).Fire(this.gameObject, direction);
+
         Reload();
 
     }

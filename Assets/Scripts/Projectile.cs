@@ -20,11 +20,15 @@ public class Projectile : MonoBehaviour {
     public void Fire(GameObject sender, Vector3 startPosition) {
         this.sender = sender;
         GetComponent<Rigidbody>().velocity = startPosition * speed;
+
+		// Eventually destroy bullets:
+		Destroy(this.gameObject, 20.0f);
     }
 
-    public void Fire(Vector3 startPosition, float customSpeed) {
-        GetComponent<Rigidbody>().AddForce(startPosition * customSpeed);
-    }
+//    public void Fire(Vector3 startPosition, float customSpeed) {
+//        GetComponent<Rigidbody>().AddForce(startPosition * customSpeed);
+//    }
+
 
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.GetInstanceID() != sender.GetInstanceID()) {

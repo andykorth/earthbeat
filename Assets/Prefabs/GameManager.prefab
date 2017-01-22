@@ -78,6 +78,10 @@ MonoBehaviour:
     type: 2}
   plasmaExplosion: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
     type: 2}
+  muzzleEffect: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
+    type: 2}
+  muzzleSparks: {fileID: 1034184514996888, guid: 1b4f5cf0906864b06b8b223dab6334ac,
+    type: 2}
   bloodImpact: {fileID: 1000012909287652, guid: abb9f519b142e304d9c45b56afa768bc,
     type: 2}
 --- !u!114 &114847369410770262
