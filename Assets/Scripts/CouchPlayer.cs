@@ -8,6 +8,7 @@ public class CouchPlayer : MonoBehaviour {
     public Projectile projectile;
     public int playerNum;
     public GameObject spawnPosition;
+    public GameObject explosion;
 
 	public float verticalRotationSpeed = 2.0f;
 	public float horizontalRotationSpeed = 2.0f;
@@ -55,7 +56,7 @@ public class CouchPlayer : MonoBehaviour {
     }
 
     private IEnumerator _WaitForNextShot() {
-        yield return new WaitForSeconds(.35f);
+        yield return new WaitForSeconds(.50f);
         canShoot = true;
 
     }
@@ -84,11 +85,6 @@ public class CouchPlayer : MonoBehaviour {
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
     }
 
-	public void Update(){
-
-	    // Visual effects run in the update loop.
-	}
-
     public void Fire() {
         canShoot = false;
 
@@ -98,5 +94,11 @@ public class CouchPlayer : MonoBehaviour {
         //direction.Normalize(); // direction vector normalized to magnitude 1
         Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
         WaitForNextShot();
+    }
+
+    public void OnCollisionEnter(Collision collision) {
+        Destroy(this.gameObject);
+        GameObject go = Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(go, 4);
     }
 }

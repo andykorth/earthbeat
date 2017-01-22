@@ -3770,6 +3770,7 @@ MonoBehaviour:
     type: 2}
   playerNum: 0
   spawnPosition: {fileID: 1229119532533408}
+  explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 2}
   verticalRotationSpeed: 50
   horizontalRotationSpeed: 50
   tilt: 2

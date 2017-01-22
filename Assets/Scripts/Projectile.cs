@@ -7,8 +7,10 @@ public class Projectile : MonoBehaviour {
     public float speed = 5f;
     private GameObject sender;
 
+    [SerializeField] private GameObject explosion;
+
     void Awake() {
-        Destroy(this.gameObject, 10);
+        Destroy(this.gameObject, 8);
     }
 
     public int getDamage() {
@@ -25,8 +27,10 @@ public class Projectile : MonoBehaviour {
     }
 
     public void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject != sender) {
+        if (collision.gameObject.GetInstanceID() != sender.GetInstanceID()) {
             Destroy(this.gameObject);
+            GameObject exposionInst = Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(exposionInst, 1);
         }
 
         //TODO: effects!
