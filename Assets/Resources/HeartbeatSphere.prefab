@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33048715341396028}
   - component: {fileID: 135660424141124040}
   - component: {fileID: 23306347804028566}
+  - component: {fileID: 114683909225842336}
   m_Layer: 0
   m_Name: HeartbeatSphere
   m_TagString: Untagged
@@ -55,7 +56,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 3918b168456ebb64ea3bfecbfff8a080, type: 2}
+  - {fileID: 2100000, guid: 9714056c7ed0f4aa194e23e564cd78ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,6 +81,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1781100757604998}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114683909225842336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1781100757604998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6078ee56c1638224eb4fb07b25f3b36b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &135660424141124040
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -88,7 +100,7 @@ SphereCollider:
   m_GameObject: {fileID: 1781100757604998}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
