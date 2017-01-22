@@ -24,10 +24,17 @@ public class CouchPlayer : MonoBehaviour {
     private Quaternion baseRotation;
     private Camera cam;
     private float length;
+    private Camera trackingCamera;
+    private GameObject trackedObject;
+    private float time;
 
     public void SetupController(int playerNum) {
-        this.cam = this.transform.Find("Camera").GetComponent<Camera>();
-	    this.playerNum = playerNum;
+        this.playerNum = playerNum;
+
+        GameObject camObj = new GameObject("Camera_"+playerNum);
+        trackingCamera = camObj.AddComponent<Camera>();
+        trackedObject = this.transform.Find("TrackingCamera").gameObject;
+
 		player = ReInput.players.GetPlayer(playerNum);
 	    rb = this.GetComponent<Rigidbody>();
 
@@ -45,12 +52,13 @@ public class CouchPlayer : MonoBehaviour {
     }
 
     private void SetCamera() {
-        this.cam.rect = GameManager.Instance.PlayerCamPositions[playerNum];
+        this.trackingCamera.rect = GameManager.Instance.PlayerCamPositions[playerNum];
+        //this.trackingCamera.targetDisplay = 2;
     }
 
 
 
-	void FixedUpdate() {
+    void FixedUpdate() {
 		// Physics / Motion updates are best suited for the Fixed Update loop
 		float moveHorizontal = player.GetAxis("Horiz") * (horizontalRotationSpeed) * Time.deltaTime;
 		float moveVertical = player.GetAxis("Vert") * (verticalRotationSpeed) * Time.deltaTime;
@@ -62,11 +70,8 @@ public class CouchPlayer : MonoBehaviour {
             Fire();
         }
 
-		transform.rotation = Quaternion.LookRotation(GameManager.Instance.VRPlayer.transform.position - this.transform.position);
-	    //rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
-
-	    // Also, if we want physics interaction, we should be setting a rigid body's velocity, rather than modifying the
-		// position directly
+        Quaternion lookRot = Quaternion.LookRotation(GameManager.Instance.VRPlayer.transform.position - this.transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 2f);
 
 	    Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
 	    movement = transform.rotation * movement;
@@ -74,12 +79,14 @@ public class CouchPlayer : MonoBehaviour {
 	}
 
 	public void Update(){
-		// Visual effects run in the update loop.
+	    trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
+	    trackingCamera.transform.rotation = trackedObject.transform.rotation;
+	    // Visual effects run in the update loop.
 	}
 
     public void Fire() {
         Vector3 direction =  spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
         direction.Normalize(); // direction vector normalized to magnitude 1
-        Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(direction);
+        Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
     }
 }
