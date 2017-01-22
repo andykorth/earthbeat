@@ -19,12 +19,12 @@ public class VRPlayer : MonoBehaviour {
     void OnCollisionEnter(Collision collision) {
         var projectile = collision.collider.transform.gameObject.GetComponent<Projectile>();
         if (projectile != null) {
-            health = health - projectile.getDamage();
-            ProcessDamage();
+            ProcessDamage(projectile.getDamage());
         }
     }
 
-    void ProcessDamage() {
+    void ProcessDamage(int dmg) {
+        health = health - dmg;
         if (health == 0) {
             //TODO: What to do when the VR player "dies"?
         }
