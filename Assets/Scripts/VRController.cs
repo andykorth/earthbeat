@@ -65,7 +65,7 @@ public class VRController : MonoBehaviour {
 			isEnlarged = false;
 		}
 
-		if (canFire && avgAcceleration > 1.5f) {
+		if (canFire && avgAcceleration > 1.0f) {
 			nextFireTime = Time.time + 0.5f;
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
 			//canFire = false;
@@ -84,6 +84,6 @@ public class VRController : MonoBehaviour {
 		isEnlarged = true;
 		enlargedTime = Time.time;
 
-		AudioManager.i.PlaySlap ();
+		//AudioManager.i.PlaySlap ();
 	}
 }
