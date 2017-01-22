@@ -15,7 +15,7 @@ public class VRController : MonoBehaviour {
 	private SteamVR_TrackedController trackedController;
 
 	private const int FRAMECOUNT = 90;
-	private float FIRESTRENGTH = 15f;
+	private float FIRESTRENGTH = 30f;
 
 	private void Awake() {
 		trackedController = gameObject.AddComponent<SteamVR_TrackedController> ();
@@ -57,7 +57,7 @@ public class VRController : MonoBehaviour {
 		float avgVelocity = velocitySum.magnitude / FRAMECOUNT, avgAcceleration = accelerationSum.magnitude / FRAMECOUNT;
 
 		if (canFire && avgAcceleration > 1.5f) {
-			nextFireTime = Time.time + 0.25f;
+			nextFireTime = Time.time + 0.5f;
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
 			canFire = false;
 		}
