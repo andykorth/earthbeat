@@ -127,8 +127,8 @@ public class CouchPlayer : MonoBehaviour {
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
 
 		// Adjust the roll of the ship just for visual fun:
-		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * -30.0f, Time.deltaTime * 60.0f);
-		recolorableSection.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
+		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * 30.0f, Time.deltaTime * 100.0f);
+		recolorableSection.transform.localRotation = Quaternion.Euler(0f, 180f, roll);
     }
 	private float roll = 0f;
 
@@ -150,6 +150,21 @@ public class CouchPlayer : MonoBehaviour {
         Reload();
 
     }
+
+	public void OnTriggerEnter(Collider other) {
+		if (other.tag == "LandingZone") {
+
+			if (dead || invincible) return;
+
+			Debug.Log("Player " +this.playerNum+ " landed!");
+			GameManager.Instance.DroneLanded ();
+
+			GameObject go = Instantiate(ParticleManager.i.plasmaExplosion, transform.position, transform.rotation);
+			Destroy(go, 10);
+
+			StartRespawnTimer ();
+		}
+	}
 
     public void OnCollisionEnter(Collision collision) {
         if (dead || invincible) return;
