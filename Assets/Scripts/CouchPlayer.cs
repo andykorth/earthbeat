@@ -116,15 +116,21 @@ public class CouchPlayer : MonoBehaviour {
             Fire();
         }
 
-        Quaternion lookRot = Quaternion.LookRotation(GameManager.Instance.VRPlayer.transform.position - this.transform.position);
+		Quaternion lookRot = Quaternion.LookRotation (GameManager.Instance.VRPlayer.transform.position - this.transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 2f);
+		
 
 	    Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
 	    movement = transform.rotation * movement;
 	    rb.velocity = movement * planeCurrentSpeed;
         trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
+
+		// Adjust the roll of the ship just for visual fun:
+		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * -30.0f, Time.deltaTime * 60.0f);
+		recolorableSection.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
     }
+	private float roll = 0f;
 
 	private bool useSpawnPoint1 = true;
     public void Fire() {
