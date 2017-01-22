@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
     private int damage = 2;
-    public float speed = 100f;
+    public float speed = 50f;
 
 
-    void Start() {
+    void Awake() {
         Destroy(this.gameObject, 10);
     }
 
@@ -16,12 +16,17 @@ public class Projectile : MonoBehaviour {
     }
 
     public void Fire(Vector3 startPosition) {
-        GetComponent<Rigidbody>().AddForce(startPosition * speed);
+        GetComponent<Rigidbody>().velocity = startPosition * speed;
+
     }
 
     public void Fire(Vector3 startPosition, float customSpeed) {
         GetComponent<Rigidbody>().AddForce(startPosition * customSpeed);
     }
 
+    public void OnCollisionEnter() {
+        Destroy(this.gameObject);
+        //TODO: effects!
+    }
 
 }
