@@ -8,6 +8,7 @@ public class AudioManager : SingletonScript<AudioManager> {
 	public AudioClip[] slaps;
 	public AudioClip[] swoops;
 	public AudioClip[] monsters;
+	public AudioClip playerStart;
 
 	public void PlayLaser(){
 		PlayRandom (lasers, Random.value * 0.2f + 0.9f, 0.5f);
@@ -25,6 +26,10 @@ public class AudioManager : SingletonScript<AudioManager> {
 		}
 		AudioClip c = all[Random.Range(0, all.Length)];
 		PlayClip (c, pitchBend, vol);	
+	}
+
+	public void PlayerStart(){
+		PlayClip (playerStart);
 	}
 
 	private float nextSound = 0;

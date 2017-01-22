@@ -12,9 +12,9 @@ public class MultipleDisplayManager : MonoBehaviour {
 			d.Activate ();
 		}
 		Debug.Log ("Active displays: " + displayCount);
-		if (displayCount <= 1) {
-			Debug.LogError ("EarthBeat requires a vive display and a secondary display. It won't work well!");
-		}
+//		if (displayCount <= 1) {
+//			Debug.LogError ("EarthBeat requires a vive display and a secondary display. It won't work well!");
+//		}
 	}
 	
 
