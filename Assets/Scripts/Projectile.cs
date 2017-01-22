@@ -48,6 +48,8 @@ public class Projectile : MonoBehaviour {
 			Destroy(exposionInst, 1);
 
 			GameManager.Instance.VRPlayerTookDamage ();
+
+			HeartRateMonitor.ReceiveChangeOfRate(1);
 		}
 	}
 

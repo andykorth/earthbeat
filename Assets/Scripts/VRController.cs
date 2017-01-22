@@ -77,6 +77,10 @@ public class VRController : MonoBehaviour {
 			nextFireTime = Time.time + 0.5f;
 			enlargementSpeed = 1f;
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
+			if (avgAcceleration > 2.0f)
+			{
+				HeartRateMonitor.ReceiveChangeOfRate((int) avgAcceleration*5);
+			}
 			//canFire = false;
 		}
 

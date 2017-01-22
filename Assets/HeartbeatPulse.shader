@@ -68,7 +68,7 @@ Category {
 				float partZ = i.projPos.z;
 				float fade = saturate (_InvFade * (sceneZ-partZ));
 
-				fade = smoothstep(fade * 0.8, fade , 0.8) * fade;
+				fade = smoothstep(fade * 0.8, fade , 0.8);
 
 				i.color.a *= fade;
 				#endif
