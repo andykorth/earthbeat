@@ -96,10 +96,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void CouchPlayerDied(CouchPlayer player) {
+    public void CouchPlayerDied(int playerNum) {
         //playerMap.Add(new PlayerMap(rewiredPlayerId, rewiredPlayerId));
-        var pm = playerMap.Find(p => p.gamePlayerId == player.playerNum);
+        var pm = playerMap.Find(p => p.gamePlayerId == playerNum);
         var index = playerMap.IndexOf(pm);
-        if (index > -1) playerMap.RemoveAt(index);
+        if (index > -1) {
+            playerMap.RemoveAt(index);
+            Debug.Log("Removed player " + playerNum);
+        }
+        else {
+            Debug.LogError("Couldn't find player in playerMap! This should not happen.");
+        }
+
     }
 }

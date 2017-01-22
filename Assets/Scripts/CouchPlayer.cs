@@ -5,13 +5,15 @@ using UnityEngine;
 using Rewired;
 
 public class CouchPlayer : MonoBehaviour {
+    public bool dead;
+
     public Projectile projectile;
     public int playerNum;
     public GameObject spawnPosition;
     public GameObject explosion;
 
 	public float verticalRotationSpeed = 2.0f;
-	public float horizontalRotationSpeed = 2.0f;
+	public float horizontalRotationSpeed = 4.0f;
 
 	// The Rewired Player, used for input for this specific controller.
 	private Player player;
@@ -21,7 +23,7 @@ public class CouchPlayer : MonoBehaviour {
     private Rigidbody rb;
 
     // We probably want to vary the speed, but for now it's constant:
-    public float planeCurrentSpeed = 7.0f;
+    public float planeCurrentSpeed = 10.0f;
     private Quaternion baseRotation;
     private Camera cam;
     private float length;
@@ -29,16 +31,25 @@ public class CouchPlayer : MonoBehaviour {
     private GameObject trackedObject;
     private bool canShoot;
     private GameObject canvas;
-    private float SHOOT_TIMER = 0.15f;
-    private float RELOAD_TIMER = 1f;
+    private float SHOOT_TIMER = 0.25f;
+    private float RELOAD_TIMER = 1.75f;
     public int shotChamber = 6;
-    private readonly int MAX_SHOTS = 4;
-    private readonly int OVERHEAT_TIMER = 3;
+    private readonly int MAX_SHOTS = 6;
+    private readonly float OVERHEAT_TIMER = 2.2f;
+
+
+    private IEnumerator respawnCoroutine;
+    private IEnumerator reloadCoroutine;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
     public void SetupController(int playerNum) {
+        dead = false;
         this.playerNum = playerNum;
         canShoot = true;
         trackingCamera = GameObject.Find("Camera" + (playerNum + 1)).GetComponent<Camera>();
+        initialPosition = trackingCamera.transform.localPosition;
+        initialRotation = trackingCamera.transform.rotation;
         canvas = trackingCamera.transform.Find("BGCanvas-PressStartToJoin").gameObject;
         canvas.SetActive(false);
         trackedObject = this.transform.Find("TrackingCamera").gameObject;
@@ -59,12 +70,18 @@ public class CouchPlayer : MonoBehaviour {
     }
 
     private void Reload() {
-        if (shotChamber < MAX_SHOTS) StartCoroutine(_Reload());
+        if (shotChamber < MAX_SHOTS) {
+            reloadCoroutine = _Reload();
+            StartCoroutine(reloadCoroutine);
+        }
     }
 
     private IEnumerator _Reload() {
         yield return new WaitForSeconds(shotChamber == 0 ? OVERHEAT_TIMER : RELOAD_TIMER);
-        shotChamber++;
+        if (shotChamber < MAX_SHOTS) {
+            shotChamber = shotChamber + 1;
+        }
+
     }
 
     private void ShootInterval() {
@@ -78,6 +95,7 @@ public class CouchPlayer : MonoBehaviour {
 
 
     void FixedUpdate() {
+        if (dead) return;
 		// Physics / Motion updates are best suited for the Fixed Update loop
 		float moveHorizontal = player.GetAxis("Horiz") * (horizontalRotationSpeed) * Time.deltaTime;
 		float moveVertical = player.GetAxis("Vert") * (verticalRotationSpeed) * Time.deltaTime;
@@ -95,7 +113,6 @@ public class CouchPlayer : MonoBehaviour {
 	    Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
 	    movement = transform.rotation * movement;
 	    rb.velocity = movement * planeCurrentSpeed;
-
         trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
     }
@@ -109,23 +126,30 @@ public class CouchPlayer : MonoBehaviour {
         //direction.Normalize(); // direction vector normalized to magnitude 1
         Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
         Reload();
+
     }
 
     public void OnCollisionEnter(Collision collision) {
-        Destroy(this.gameObject);
+        if (dead) return;
         GameObject go = Instantiate(explosion, transform.position, transform.rotation);
         Destroy(go, 4);
+        this.gameObject.transform.Find("Ship_Fixed_01").gameObject.SetActive(false);
         StartRespawnTimer();
     }
 
     private void StartRespawnTimer() {
-        StartCoroutine(_Respawn());
+        dead = true;
+        respawnCoroutine = _Respawn();
+        StartCoroutine(respawnCoroutine);
     }
 
     private IEnumerator _Respawn() {
         yield return new WaitForSeconds(2f);
-        GameManager.Instance.CouchPlayerDied(this);
         canvas.SetActive(true);
+        trackingCamera.transform.position = initialPosition;
+        trackingCamera.transform.rotation = initialRotation;
+        GameManager.Instance.CouchPlayerDied(this.playerNum);
+        Destroy(this.gameObject);
     }
 
 }
