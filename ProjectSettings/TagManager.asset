@@ -6,6 +6,7 @@ TagManager:
   tags:
   - HRM
   - LandingZone
+  - Polyp
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour {
         get { return _VRPlayer; }
     }
 
-	public int VRPlayerHitPoints = 500;
+	public int VRMaxPlayerHitPoints = 500;
+	private int VRCurrentPlayerHitPoints = 500;
 	public int droneDeaths = 0;
 	public int droneLandings = 0;
 
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         playerMap = new List<PlayerMap>();
+		VRCurrentPlayerHitPoints = VRMaxPlayerHitPoints;
     }
 
     void Update() {
@@ -66,8 +68,9 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void VRPlayerTookDamage(){
-		VRPlayerHitPoints -= 1;
-		Debug.Log ("Hit VR Player: " + VRPlayerHitPoints);
+		VRCurrentPlayerHitPoints -= 1;
+		Debug.Log ("Hit VR Player: " + VRCurrentPlayerHitPoints);
+		DroneUIManager.i.bossBar.SetProgress (100f * (VRCurrentPlayerHitPoints / (float)VRMaxPlayerHitPoints));
 	}
 
     void AssignNextPlayer(int rewiredPlayerId) {

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DroneUIManager : SingletonScript<DroneUIManager> {
 
 	public Text kills, landings;
+	public ProgressBarElement bossBar;
 
 	public void UpdateUI(int killCount, int landingCount){
 		kills.text = "Deaths: " + killCount;
