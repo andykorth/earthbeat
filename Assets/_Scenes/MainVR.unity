@@ -1193,6 +1193,11 @@ Prefab:
       propertyPath: handModelTransform
       value: 
       objectReference: {fileID: 1984155106}
+    - target: {fileID: 20172082314733602, guid: be16bb0117f6c425a9b37e6438f55b9c,
+        type: 2}
+      propertyPath: near clip plane
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114155360481001254, guid: be16bb0117f6c425a9b37e6438f55b9c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: be16bb0117f6c425a9b37e6438f55b9c, type: 2}
