@@ -95,4 +95,11 @@ public class GameManager : MonoBehaviour {
             this.gamePlayerId = gamePlayerId;
         }
     }
+
+    public void CouchPlayerDied(CouchPlayer player) {
+        //playerMap.Add(new PlayerMap(rewiredPlayerId, rewiredPlayerId));
+        var pm = playerMap.Find(p => p.gamePlayerId == player.playerNum);
+        var index = playerMap.IndexOf(pm);
+        if (index > -1) playerMap.RemoveAt(index);
+    }
 }
