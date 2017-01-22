@@ -1,4 +1,4 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -158,6 +158,7 @@ public class CouchPlayer : MonoBehaviour {
 
 			Debug.Log("Player " +this.playerNum+ " landed!");
 			GameManager.Instance.DroneLanded ();
+			AudioManager.i.PlayerLanded ();
 
 			GameObject go = Instantiate(ParticleManager.i.plasmaExplosion, transform.position, transform.rotation);
 			Destroy(go, 10);

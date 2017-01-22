@@ -400,6 +400,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1762c36cbbd1b42589cc45b75aaeeff1, type: 3}
   - {fileID: 8300000, guid: a5fe2cdf5488f41c6ada6af85b4d4ffb, type: 3}
   playerStart: {fileID: 8300000, guid: 4477e62eb2ea1432abf8966d718345d8, type: 3}
+  playerLanded: {fileID: 8300000, guid: df490d2b2c7d84ba198b87efaa02ba41, type: 3}
 --- !u!114 &114963049531227436
 MonoBehaviour:
   m_ObjectHideFlags: 1
