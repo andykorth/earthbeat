@@ -40,4 +40,15 @@ public class Projectile : MonoBehaviour {
         //TODO: effects!
     }
 
+	public void OnTriggerEnter(Collider other) {
+		if (other.tag == "Polyp") {
+			// We hit the big bad guy!
+			Destroy(this.gameObject);
+			GameObject exposionInst = Instantiate(explosion, transform.position, transform.rotation);
+			Destroy(exposionInst, 1);
+
+			GameManager.Instance.VRPlayerTookDamage ();
+		}
+	}
+
 }

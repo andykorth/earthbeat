@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour {
 
 	public void VRPlayerTookDamage(){
 		VRPlayerHitPoints -= 1;
+		Debug.Log ("Hit VR Player: " + VRPlayerHitPoints);
 	}
 
     void AssignNextPlayer(int rewiredPlayerId) {
