@@ -99,7 +99,9 @@ public class GameManager : MonoBehaviour {
     CouchPlayer SetupNewCouchPlayer(int num) {
         //TODO: random spawn point around the VRPlayer...?
         GameObject spawnPoint = GameObject.Find(string.Format("Player{0}_Spawn", num+1));
-        GameObject newPlayerObject = Instantiate(couchPlayerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
+        SpawnPoint sp = spawnPoint.GetComponent<SpawnPoint>();
+        Vector3 pos = sp.GetSpawnPoint();
+        GameObject newPlayerObject = Instantiate(couchPlayerPrefab, pos, spawnPoint.transform.rotation);
         var couchPlayer = newPlayerObject.GetComponent<CouchPlayer>();
         couchPlayer.SetupController(num);
 		couchPlayer.SetColor (playerColors [num]);
