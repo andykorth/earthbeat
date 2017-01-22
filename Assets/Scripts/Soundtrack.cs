@@ -11,6 +11,8 @@ public class Soundtrack : Script {
 	void Start () {
 		audioSources = transform.GetComponentsInChildren<AudioSource> ();
 
+		currentTrack = Random.Range (0, audioSources.Length);
+
 		// Play first track immediately.
 		audioSources [currentTrack].Play ();
 		audioSources [currentTrack].volume = 1.0f;
