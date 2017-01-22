@@ -91,6 +91,9 @@ public class CouchPlayer : MonoBehaviour {
 
     public void Fire() {
         canShoot = false;
+
+		AudioManager.i.PlayLaser ();
+
         Vector3 direction = -spawnPosition.transform.forward;//spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
         //direction.Normalize(); // direction vector normalized to magnitude 1
         Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
