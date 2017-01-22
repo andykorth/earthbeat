@@ -8,7 +8,6 @@ public class Splashfade : MonoBehaviour
 {
 
     public Image splashImage;
-    public string loadLevel;
 
     IEnumerator Start()
     {
@@ -18,7 +17,7 @@ public class Splashfade : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         FadeOut();
         yield return new WaitForSeconds(2.5f);
-        SceneManager.LoadScene(loadLevel);
+        SceneManager.LoadScene("TitleScene");
     }
 
     void FadeIn()
