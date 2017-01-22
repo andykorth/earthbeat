@@ -52,9 +52,8 @@ public class CouchPlayer : MonoBehaviour {
 
 	void FixedUpdate() {
 		// Physics / Motion updates are best suited for the Fixed Update loop
-
-		float moveHorizontal = player.GetAxis("Horiz") * (horizontalRotationSpeed* -1) * Time.deltaTime;
-		float moveVertical = player.GetAxis("Vert") * (verticalRotationSpeed * -1) * Time.deltaTime;
+		float moveHorizontal = player.GetAxis("Horiz") * (horizontalRotationSpeed) * Time.deltaTime;
+		float moveVertical = player.GetAxis("Vert") * (verticalRotationSpeed) * Time.deltaTime;
 		float rightMoveVertical = player.GetAxis("RightVert") * verticalRotationSpeed * Time.deltaTime;
 
 	    bool fire = player.GetButtonDown("Fire");
@@ -68,8 +67,9 @@ public class CouchPlayer : MonoBehaviour {
 
 	    // Also, if we want physics interaction, we should be setting a rigid body's velocity, rather than modifying the
 		// position directly
-	    //TODO: this isn't quite right...
-	    Vector3 movement = new Vector3 (moveVertical, rightMoveVertical, moveHorizontal * -1);
+
+	    Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
+	    movement = transform.rotation * movement;
 	    rb.velocity = movement * planeCurrentSpeed;
 	}
 
