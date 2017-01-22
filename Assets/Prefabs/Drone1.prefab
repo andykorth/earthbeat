@@ -409,5 +409,5 @@ MonoBehaviour:
   verticalRotationSpeed: 50
   horizontalRotationSpeed: 50
   tilt: 2
-  planeCurrentSpeed: 5
+  planeCurrentSpeed: 10
   shotChamber: 6
