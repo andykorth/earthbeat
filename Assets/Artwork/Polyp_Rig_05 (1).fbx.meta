@@ -1,59 +1,55 @@
 fileFormatVersion: 2
-guid: 2288265a9105881489d6d546c9cf16bf
-timeCreated: 1485036039
+guid: 3caaf0673ca54fe4c9a0b69a0bf8da36
+timeCreated: 1485075437
 licenseType: Pro
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Arm_1_L
-    100002: Arm_1_R
-    100004: Arm_2_L
-    100006: Arm_2_R
-    100008: Arm_3
-    100010: Arm_3.002
-    100012: Arm_4.002
-    100014: Chest
-    100016: Head
-    100018: Head_end
-    100020: Midriff
-    100022: Nodule_L
-    100024: Nodule_L_end
-    100026: Nodule_R
-    100028: Nodule_R_end
-    100030: Polyp_01
-    100032: //RootNode
-    100034: Polyp_RIG_01
-    100036: Root
-    100038: Shoulder_L
-    100040: Shoulder_R
-    100042: Torso
-    400000: Arm_1_L
-    400002: Arm_1_R
-    400004: Arm_2_L
-    400006: Arm_2_R
-    400008: Arm_3
-    400010: Arm_3.002
-    400012: Arm_4.002
-    400014: Chest
-    400016: Head
-    400018: Head_end
-    400020: Midriff
-    400022: Nodule_L
-    400024: Nodule_L_end
-    400026: Nodule_R
-    400028: Nodule_R_end
-    400030: Polyp_01
-    400032: //RootNode
-    400034: Polyp_RIG_01
-    400036: Root
-    400038: Shoulder_L
-    400040: Shoulder_R
-    400042: Torso
-    4300000: Polyp_01
+    100000: Chest
+    100002: Eye
+    100004: Eye_end
+    100006: Head
+    100008: Midriff
+    100010: Nodule_L
+    100012: Nodule_L_end
+    100014: Nodule_R
+    100016: Nodule_R_end
+    100018: Player_Hand_L
+    100020: Player_Hand_R
+    100022: Polyp_GEO_Low
+    100024: Polyp_RIG_02
+    100026: //RootNode
+    100028: Root
+    100030: Shoulder_L
+    100032: Shoulder_R
+    100034: Tongue
+    100036: Tongue_end
+    100038: Torso
+    400000: Chest
+    400002: Eye
+    400004: Eye_end
+    400006: Head
+    400008: Midriff
+    400010: Nodule_L
+    400012: Nodule_L_end
+    400014: Nodule_R
+    400016: Nodule_R_end
+    400018: Player_Hand_L
+    400020: Player_Hand_R
+    400022: Polyp_GEO_Low
+    400024: Polyp_RIG_02
+    400026: //RootNode
+    400028: Root
+    400030: Shoulder_L
+    400032: Shoulder_R
+    400034: Tongue
+    400036: Tongue_end
+    400038: Torso
+    4300000: Polyp_GEO_Low
     9500000: //RootNode
-    13700000: Polyp_01
+    13700000: Polyp_GEO_Low
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
   animations:

@@ -5,6 +5,8 @@ using UnityEngine;
 public class VRController : MonoBehaviour {
 	public Rigidbody stickyHand;
 
+	public Transform handModelTransform;
+
 	private Vector3 lastPosition;
 	private Vector3[] velocity = new Vector3[FRAMECOUNT];
 	private Vector3[] acceleration = new Vector3[FRAMECOUNT];
@@ -15,7 +17,9 @@ public class VRController : MonoBehaviour {
 	private SteamVR_TrackedController trackedController;
 
 	private const int FRAMECOUNT = 90;
-	private float FIRESTRENGTH = 500f;
+	private float FIRESTRENGTH = 300f;
+	private bool isEnlarged;
+	private float enlargedTime;
 
 	private void Awake() {
 		trackedController = gameObject.AddComponent<SteamVR_TrackedController> ();
@@ -56,6 +60,11 @@ public class VRController : MonoBehaviour {
 
 		float avgVelocity = velocitySum.magnitude / FRAMECOUNT, avgAcceleration = accelerationSum.magnitude / FRAMECOUNT;
 
+		if (isEnlarged && enlargedTime + 1.5f > Time.time) {
+			handModelTransform.localScale = new Vector3 (1f, 1f, 1f);
+			isEnlarged = false;
+		}
+
 		if (canFire && avgAcceleration > 1.5f) {
 			nextFireTime = Time.time + 0.5f;
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
@@ -71,5 +80,8 @@ public class VRController : MonoBehaviour {
 
 	private void OnFire(Vector3 projectileSpeed) {
 		stickyHand.velocity = projectileSpeed;
+		handModelTransform.localScale = new Vector3 (10f, 10f, 10f);
+		isEnlarged = true;
+		enlargedTime = Time.time;
 	}
 }
