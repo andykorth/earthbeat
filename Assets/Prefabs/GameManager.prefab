@@ -53,8 +53,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7ac2b1ccd3d4300bd60da33a57c0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  couchPlayerPrefab: {fileID: 1127831504660898, guid: e3743a8144a954f448100da19e62e344,
-    type: 2}
+  couchPlayerPrefab:
+  - {fileID: 1127831504660898, guid: e3743a8144a954f448100da19e62e344, type: 2}
+  - {fileID: 1127831504660898, guid: 64cb1881b520745c2971e6aa7361b495, type: 2}
+  - {fileID: 1127831504660898, guid: bbee9b4293c04483b8944c56c7fbdf42, type: 2}
   maxPlayers: 4
   playerColors:
   - {r: 0.5019608, g: 0, b: 0, a: 1}

@@ -12,10 +12,11 @@ public class CouchPlayer : MonoBehaviour {
 	public GameObject spawnPosition1;
 	public GameObject spawnPosition2;
 	public GameObject explosion;
-    private GameObject actualShip;
+//    private GameObject actualShip;
 
 	public MeshRenderer recolorableSection;
 	public int recolorableMaterialIndex;
+	public Transform rollTransform;
 
 	public float verticalRotationSpeed = 2.0f;
 	public float horizontalRotationSpeed = 4.0f;
@@ -58,7 +59,6 @@ public class CouchPlayer : MonoBehaviour {
     private int dashModifier = 10;
     private float DASH_TIMER = 0.25f;
 
-    private string SHIP_MODEL_NAME = "Ship_Fixed_01";
 
     public void SetupController(int playerNum) {
         dead = false;
@@ -74,8 +74,7 @@ public class CouchPlayer : MonoBehaviour {
         canvas = trackingCamera.transform.Find("BGCanvas-PressStartToJoin").gameObject;
         canvas.SetActive(false);
         trackedObject = this.transform.Find("TrackingCamera").gameObject;
-        actualShip = this.gameObject.transform.Find(SHIP_MODEL_NAME).gameObject;
-        player = ReInput.players.GetPlayer(playerNum);
+		player = ReInput.players.GetPlayer(playerNum);
 	    rb = this.GetComponent<Rigidbody>();
 
 	    if (player == null || !player.isPlaying) {
@@ -90,9 +89,9 @@ public class CouchPlayer : MonoBehaviour {
     }
 
 	public void SetColor(Color c){
-		Material m = recolorableSection.materials [recolorableMaterialIndex];
-		m.color = c;
-		recolorableSection.materials[recolorableMaterialIndex] = m;
+//		Material m = recolorableSection.materials [recolorableMaterialIndex];
+//		m.color = c;
+//		recolorableSection.materials[recolorableMaterialIndex] = m;
 	}
 
 
@@ -128,7 +127,7 @@ public class CouchPlayer : MonoBehaviour {
 
 		// Adjust the roll of the ship just for visual fun:
 		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * 30.0f, Time.deltaTime * 100.0f);
-		recolorableSection.transform.localRotation = Quaternion.Euler(0f, 180f, roll);
+		rollTransform.localRotation = Quaternion.Euler(0f, 180f, roll);
     }
 	private float roll = 0f;
 
@@ -171,7 +170,7 @@ public class CouchPlayer : MonoBehaviour {
         if (dead || invincible) return;
         GameObject go = Instantiate(explosion, transform.position, transform.rotation);
         Destroy(go, 4);
-        this.gameObject.transform.Find(SHIP_MODEL_NAME).gameObject.SetActive(false);
+		rollTransform.gameObject.SetActive(false);
         StartRespawnTimer();
 
 		GameManager.Instance.DroneDied ();
