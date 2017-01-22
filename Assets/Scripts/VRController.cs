@@ -15,7 +15,7 @@ public class VRController : MonoBehaviour {
 	private SteamVR_TrackedController trackedController;
 
 	private const int FRAMECOUNT = 90;
-	private float FIRESTRENGTH = 30f;
+	private float FIRESTRENGTH = 500f;
 
 	private void Awake() {
 		trackedController = gameObject.AddComponent<SteamVR_TrackedController> ();
