@@ -86,7 +86,7 @@ MonoBehaviour:
     type: 2}
   residualSmoke: {fileID: 1000012560919920, guid: 85a8865d1bf4a63478038fae23776de8,
     type: 2}
-  plasmaExplosion: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9,
+  plasmaExplosion: {fileID: 1632243208298164, guid: 658533411ca1a42e8ba48887571b5a31,
     type: 2}
   muzzleEffect: {fileID: 1000010254994808, guid: 9defeac88977c0d448aa4541073ee9e4,
     type: 2}

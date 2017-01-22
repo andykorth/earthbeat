@@ -970,8 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
-  projectile: {fileID: 114491917754783880, guid: eef262d7a23754f86b4b4147836b80b8,
-    type: 2}
+  projectile: {fileID: 1147122076980468, guid: 1e7c6c434c1e64a20adefb3e15c46246, type: 2}
   playerNum: 0
   spawnPosition1: {fileID: 1054323704251096}
   spawnPosition2: {fileID: 1011234659420716}
@@ -982,5 +981,5 @@ MonoBehaviour:
   verticalRotationSpeed: 50
   horizontalRotationSpeed: 50
   tilt: 2
-  planeCurrentSpeed: 5
+  planeCurrentSpeed: 10
   shotChamber: 6
