@@ -127,8 +127,8 @@ public class CouchPlayer : MonoBehaviour {
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
 
 		// Adjust the roll of the ship just for visual fun:
-		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * -30.0f, Time.deltaTime * 60.0f);
-		recolorableSection.transform.localRotation = Quaternion.Euler(0f, 0f, roll);
+		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * 30.0f, Time.deltaTime * 100.0f);
+		recolorableSection.transform.localRotation = Quaternion.Euler(0f, 180f, roll);
     }
 	private float roll = 0f;
 
