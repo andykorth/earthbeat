@@ -18,6 +18,12 @@ public class Soundtrack : Script {
 		audioSources [currentTrack].volume = 1.0f;
 	}
 
+	public void Update(){
+		if (audioSources [currentTrack].isPlaying == false) {
+			PlayNextTrack ();
+		}
+	}
+
 	public void PlayNextTrack() {
 		int current = currentTrack;
 		int nextTrack = currentTrack + 1;
