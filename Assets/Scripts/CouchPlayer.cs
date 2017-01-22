@@ -151,6 +151,21 @@ public class CouchPlayer : MonoBehaviour {
 
     }
 
+	public void OnTriggerEnter(Collider other) {
+		if (other.tag == "LandingZone") {
+
+			if (dead || invincible) return;
+
+			Debug.Log("Player " +this.playerNum+ " landed!");
+			GameManager.Instance.DroneLanded ();
+
+			GameObject go = Instantiate(ParticleManager.i.plasmaExplosion, transform.position, transform.rotation);
+			Destroy(go, 10);
+
+			StartRespawnTimer ();
+		}
+	}
+
     public void OnCollisionEnter(Collision collision) {
         if (dead || invincible) return;
         GameObject go = Instantiate(explosion, transform.position, transform.rotation);
