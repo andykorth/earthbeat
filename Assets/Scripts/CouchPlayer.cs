@@ -26,11 +26,11 @@ public class CouchPlayer : MonoBehaviour {
     private float length;
     private Camera trackingCamera;
     private GameObject trackedObject;
-    private float time;
+    private bool canShoot;
 
     public void SetupController(int playerNum) {
         this.playerNum = playerNum;
-
+        canShoot = true;
         GameObject camObj = new GameObject("Camera_"+playerNum);
         trackingCamera = camObj.AddComponent<Camera>();
         trackedObject = this.transform.Find("TrackingCamera").gameObject;
@@ -51,9 +51,23 @@ public class CouchPlayer : MonoBehaviour {
         SetCamera();
     }
 
+    private void WaitForNextShot() {
+        StartCoroutine(_WaitForNextShot());
+    }
+
+    private IEnumerator _WaitForNextShot() {
+        yield return new WaitForSeconds(.45f);
+        canShoot = true;
+
+    }
+
+
+
     private void SetCamera() {
         this.trackingCamera.rect = GameManager.Instance.PlayerCamPositions[playerNum];
-        //this.trackingCamera.targetDisplay = 2;
+//        this.trackingCamera.targetDisplay = GameManager.Instance.VRPlayer.transform.Find("[CameraRig]/Camera (head)")
+//                                                .GetComponent<Camera>()
+//                                                .targetDisplay + 1;
     }
 
 
@@ -66,7 +80,7 @@ public class CouchPlayer : MonoBehaviour {
 
 	    bool fire = player.GetButtonDown("Fire");
 
-		if (fire) {
+		if (fire && canShoot) {
             Fire();
         }
 
@@ -85,8 +99,10 @@ public class CouchPlayer : MonoBehaviour {
 	}
 
     public void Fire() {
+        canShoot = false;
         Vector3 direction =  spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
         direction.Normalize(); // direction vector normalized to magnitude 1
         Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
+        WaitForNextShot();
     }
 }
