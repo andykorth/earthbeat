@@ -56,6 +56,11 @@ MonoBehaviour:
   couchPlayerPrefab: {fileID: 1127831504660898, guid: e3743a8144a954f448100da19e62e344,
     type: 2}
   maxPlayers: 4
+  playerColors:
+  - {r: 0.5019608, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.5019608, b: 0, a: 1}
+  - {r: 0, g: 0, b: 0.5019608, a: 1}
+  - {r: 1, g: 0, b: 0.5019608, a: 1}
   _VRPlayer: {fileID: 0}
 --- !u!114 &114277147474402412
 MonoBehaviour:

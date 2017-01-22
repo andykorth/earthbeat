@@ -404,6 +404,8 @@ MonoBehaviour:
   spawnPosition1: {fileID: 1140393089050772}
   spawnPosition2: {fileID: 1325609482791084}
   explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 2}
+  recolorableSection: {fileID: 23502061934337024}
+  recolorableMaterialIndex: 2
   verticalRotationSpeed: 50
   horizontalRotationSpeed: 50
   tilt: 2

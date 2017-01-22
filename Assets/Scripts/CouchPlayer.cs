@@ -13,6 +13,9 @@ public class CouchPlayer : MonoBehaviour {
 	public GameObject spawnPosition2;
 	public GameObject explosion;
 
+	public MeshRenderer recolorableSection;
+	public int recolorableMaterialIndex;
+
 	public float verticalRotationSpeed = 2.0f;
 	public float horizontalRotationSpeed = 4.0f;
 
@@ -58,7 +61,6 @@ public class CouchPlayer : MonoBehaviour {
 		player = ReInput.players.GetPlayer(playerNum);
 	    rb = this.GetComponent<Rigidbody>();
 
-
 	    if (player == null || !player.isPlaying) {
 			// no controller for this player, delete them.
 			Debug.Log ("No controller found for playerID: " + playerNum + " Removing their fighter plane.");
@@ -69,6 +71,12 @@ public class CouchPlayer : MonoBehaviour {
 		}
 
     }
+
+	public void SetColor(Color c){
+		Material m = recolorableSection.materials [recolorableMaterialIndex];
+		m.color = c;
+		recolorableSection.materials[recolorableMaterialIndex] = m;
+	}
 
     private void Reload() {
         if (shotChamber < MAX_SHOTS) {

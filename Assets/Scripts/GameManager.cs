@@ -1,4 +1,4 @@
-﻿﻿using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Rewired;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour {
     public GameObject couchPlayerPrefab;
     public int maxPlayers = 4;
     private List<PlayerMap> playerMap; // Maps Rewired Player ids to game player ids
+
+	public List<Color> playerColors;
 
     [SerializeField]
     private GameObject _VRPlayer;
@@ -82,6 +84,7 @@ public class GameManager : MonoBehaviour {
         GameObject newPlayerObject = Instantiate(couchPlayerPrefab, spawnPoint.transform.position, spawnPoint.transform.rotation);
         var couchPlayer = newPlayerObject.GetComponent<CouchPlayer>();
         couchPlayer.SetupController(num);
+		couchPlayer.SetColor (playerColors [num]);
         return couchPlayer;
     }
 
