@@ -6,9 +6,9 @@ public class HeartbeatEffect : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localScale = transform.localScale + Vector3.one;
+		transform.localScale = transform.localScale + Vector3.one * 15f;
 
-		if (transform.localScale.x > 70f)
+		if (transform.localScale.x > 400f)
 			Destroy(gameObject);
 	}
 }

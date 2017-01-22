@@ -7,7 +7,7 @@ using Rewired;
 public class CouchPlayer : MonoBehaviour {
     public bool dead;
 
-    public Projectile projectile;
+    public GameObject projectile;
     public int playerNum;
 	public GameObject spawnPosition1;
 	public GameObject spawnPosition2;
@@ -65,7 +65,6 @@ public class CouchPlayer : MonoBehaviour {
         invincible = true;
         this.playerNum = playerNum;
         canShoot = true;
-
         StartInvincibilityTimer();
 
         trackingCamera = GameObject.Find("Camera" + (playerNum + 1)).GetComponent<Camera>();
@@ -144,8 +143,11 @@ public class CouchPlayer : MonoBehaviour {
 
 		Vector3 direction = spawn.forward; //Get a direction vector to fire the bullet at.
         //direction.Normalize(); // direction vector normalized to magnitude 1
-		Instantiate(projectile, spawn.position, spawn.rotation).Fire(this.gameObject, direction);
-
+		GameObject missile = Instantiate(projectile, spawn.position, spawn.rotation);
+		missile.GetComponent<Projectile>().Fire(this.gameObject, direction);
+        foreach (var collider in GetComponents<Collider>()) {
+            Physics.IgnoreCollision(missile.GetComponentInChildren<Collider>(), collider);
+        }
         Reload();
 
     }
