@@ -59,7 +59,7 @@ public class HeartRateMonitor : MonoBehaviour
 		if (heartRate > 40)
 		{
 			timeSinceSlowdown += Time.deltaTime;
-			if (timeSinceSlowdown >= 3 && timeSinceSlowdown >= 12 - heartRate/10)
+			if (timeSinceSlowdown >= 0.5f && timeSinceSlowdown >= 6 - heartRate/10)
 			{
 				heartRate -= 10;
 				timeSinceSlowdown = 0;

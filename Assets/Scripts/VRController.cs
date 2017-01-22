@@ -79,7 +79,7 @@ public class VRController : MonoBehaviour {
 			OnFire (FIRESTRENGTH * velocitySum / FRAMECOUNT);
 			if (avgAcceleration > 2.0f)
 			{
-				HeartRateMonitor.ReceiveChangeOfRate((int) avgAcceleration*5);
+				HeartRateMonitor.ReceiveChangeOfRate((int)( avgAcceleration*0.25f));
 			}
 			//canFire = false;
 		}
