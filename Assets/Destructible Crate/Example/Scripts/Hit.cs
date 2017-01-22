@@ -8,12 +8,12 @@ public class Hit : MonoBehaviour {
 
 	
 	void OnCollisionEnter( Collision collision ) {
-		if( collision.impactForceSum.magnitude > 25f) {
-		DestroyIt();
+		if( collision.relativeVelocity > 1.0) {
+			DestroyIt();
 		}
 	}
 	
-		void DestroyIt(){
+	void DestroyIt(){
 		if(DestroyedObject) {
 			Instantiate(DestroyedObject, transform.position, transform.rotation);
 		}

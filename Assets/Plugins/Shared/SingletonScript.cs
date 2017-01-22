@@ -32,27 +32,35 @@ public class SingletonScript <T> : Script where T:Object  {
 					//Debug.LogError("There is no " + typeof(T) + " in this scene!");				
 					return null;
 				}
-				
+
 				instance = instances[0];
 				(instance as SingletonScript<T>).SingletonCreated();
 				return instance;
 			}
 		}
 	}
-	
-	public virtual void SingletonCreated(){
-	
+
+	void OnEnable() {
+		UnityEngine.SceneManagement.SceneManager.sceneUnloaded += ResetInstance;
 	}
-	
+
+	void OnDisable() {
+		UnityEngine.SceneManagement.SceneManager.sceneUnloaded -= ResetInstance;
+	}
+
+	public virtual void SingletonCreated(){
+
+	}
+
 	public static bool Exists_VERY_EXPENSIVE(){
 		return FindObjectsOfType<T>().Length >= 1;
 	}
-		
+
 	public static bool Existed(){
 		return i != null;
 	}
 
-	public virtual void OnLevelWasLoaded(){
+	public void ResetInstance(UnityEngine.SceneManagement.Scene scene){
 		// reset the instance, since now that we've reloaded a level the old one was probably destroyed.
 		instance = null;
 	}
@@ -60,6 +68,6 @@ public class SingletonScript <T> : Script where T:Object  {
 	public static void ForceReload(){
 		instance = null;
 	}
-	
+
 
 }
