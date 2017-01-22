@@ -17,7 +17,7 @@ public class VRController : MonoBehaviour {
 	private SteamVR_TrackedController trackedController;
 
 	private const int FRAMECOUNT = 90;
-	private float FIRESTRENGTH = 75f;
+	private float FIRESTRENGTH = 100f;
 
 	private float enlargedSize;
 	private float enlargementSpeed;
