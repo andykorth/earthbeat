@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 65922630257372278}
   - component: {fileID: 65110654354403946}
   m_Layer: 8
-  m_Name: Drone
+  m_Name: Drone1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1127831504660898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7.704, z: 2.177}
+  m_LocalPosition: {x: 1.292, y: 7.704, z: 2.177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4872131266667308}
@@ -406,6 +406,7 @@ MonoBehaviour:
   explosion: {fileID: 1000011797152326, guid: acf39d9f4addf294d93fa56fa373961b, type: 2}
   recolorableSection: {fileID: 23502061934337024}
   recolorableMaterialIndex: 2
+  rollTransform: {fileID: 4872131266667308}
   verticalRotationSpeed: 50
   horizontalRotationSpeed: 50
   tilt: 2

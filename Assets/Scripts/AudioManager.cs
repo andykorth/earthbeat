@@ -9,6 +9,7 @@ public class AudioManager : SingletonScript<AudioManager> {
 	public AudioClip[] swoops;
 	public AudioClip[] monsters;
 	public AudioClip playerStart;
+	public AudioClip playerLanded;
 
 	public void PlayLaser(){
 		PlayRandom (lasers, Random.value * 0.2f + 0.9f, 0.5f);
@@ -30,6 +31,10 @@ public class AudioManager : SingletonScript<AudioManager> {
 
 	public void PlayerStart(){
 		PlayClip (playerStart);
+	}
+
+	public void PlayerLanded(){
+		PlayClip (playerLanded);
 	}
 
 	private float nextSound = 0;

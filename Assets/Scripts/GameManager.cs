@@ -3,7 +3,7 @@ using Rewired;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
-    public GameObject couchPlayerPrefab;
+    public GameObject[] couchPlayerPrefab;
     public int maxPlayers = 4;
     private List<PlayerMap> playerMap; // Maps Rewired Player ids to game player ids
 
@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour {
         get { return _VRPlayer; }
     }
 
-	public int VRPlayerHitPoints = 500;
+	public int VRMaxPlayerHitPoints = 500;
+	private int VRCurrentPlayerHitPoints = 500;
 	public int droneDeaths = 0;
 	public int droneLandings = 0;
 
@@ -43,7 +44,12 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         playerMap = new List<PlayerMap>();
+		VRCurrentPlayerHitPoints = VRMaxPlayerHitPoints;
     }
+
+	public void Start(){
+		DroneUIManager.i.bossBar.SetProgress (100f);
+	}
 
     void Update() {
 
@@ -66,8 +72,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void VRPlayerTookDamage(){
-		VRPlayerHitPoints -= 1;
-		Debug.Log ("Hit VR Player: " + VRPlayerHitPoints);
+		VRCurrentPlayerHitPoints -= 1;
+		float progress = 100f * (VRCurrentPlayerHitPoints / (float)VRMaxPlayerHitPoints);
+//		Debug.Log ("Hit VR Player: " + VRCurrentPlayerHitPoints + " Percentage: " + progress);
+		DroneUIManager.i.bossBar.SetProgress (progress);
 	}
 
     void AssignNextPlayer(int rewiredPlayerId) {
@@ -102,7 +110,8 @@ public class GameManager : MonoBehaviour {
         GameObject spawnPoint = GameObject.Find(string.Format("Player{0}_Spawn", num+1));
         SpawnPoint sp = spawnPoint.GetComponent<SpawnPoint>();
         Vector3 pos = sp.GetSpawnPoint();
-        GameObject newPlayerObject = Instantiate(couchPlayerPrefab, pos, spawnPoint.transform.rotation);
+		GameObject prefab = couchPlayerPrefab [Random.Range (0, couchPlayerPrefab.Length)];
+        GameObject newPlayerObject = Instantiate(prefab, pos, spawnPoint.transform.rotation);
         var couchPlayer = newPlayerObject.GetComponent<CouchPlayer>();
         couchPlayer.SetupController(num);
 		couchPlayer.SetColor (playerColors [num]);
