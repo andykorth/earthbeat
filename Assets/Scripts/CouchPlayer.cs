@@ -28,12 +28,19 @@ public class CouchPlayer : MonoBehaviour {
     private Camera trackingCamera;
     private GameObject trackedObject;
     private bool canShoot;
+    private GameObject canvas;
+    private float SHOOT_TIMER = 0.15f;
+    private float RELOAD_TIMER = 1f;
+    public int shotChamber = 6;
+    private readonly int MAX_SHOTS = 4;
+    private readonly int OVERHEAT_TIMER = 3;
 
     public void SetupController(int playerNum) {
         this.playerNum = playerNum;
         canShoot = true;
         trackingCamera = GameObject.Find("Camera" + (playerNum + 1)).GetComponent<Camera>();
-        trackingCamera.transform.Find("BGCanvas-PressStartToJoin").gameObject.SetActive(false);
+        canvas = trackingCamera.transform.Find("BGCanvas-PressStartToJoin").gameObject;
+        canvas.SetActive(false);
         trackedObject = this.transform.Find("TrackingCamera").gameObject;
 
 		player = ReInput.players.GetPlayer(playerNum);
@@ -51,14 +58,22 @@ public class CouchPlayer : MonoBehaviour {
 
     }
 
-    private void WaitForNextShot() {
-        StartCoroutine(_WaitForNextShot());
+    private void Reload() {
+        if (shotChamber < MAX_SHOTS) StartCoroutine(_Reload());
     }
 
-    private IEnumerator _WaitForNextShot() {
-        yield return new WaitForSeconds(.50f);
-        canShoot = true;
+    private IEnumerator _Reload() {
+        yield return new WaitForSeconds(shotChamber == 0 ? OVERHEAT_TIMER : RELOAD_TIMER);
+        shotChamber++;
+    }
 
+    private void ShootInterval() {
+        StartCoroutine(_ShootInterval());
+    }
+
+    private IEnumerator _ShootInterval() {
+        yield return new WaitForSeconds(SHOOT_TIMER);
+        canShoot = true;
     }
 
 
@@ -70,7 +85,7 @@ public class CouchPlayer : MonoBehaviour {
 
 	    bool fire = player.GetButtonDown("Fire");
 
-		if (fire && canShoot) {
+		if (fire && shotChamber > 0 && canShoot) {
             Fire();
         }
 
@@ -86,19 +101,31 @@ public class CouchPlayer : MonoBehaviour {
     }
 
     public void Fire() {
+        shotChamber = shotChamber - 1;
         canShoot = false;
-
-		AudioManager.i.PlayLaser ();
-
+        ShootInterval();
+        AudioManager.i.PlayLaser ();
         Vector3 direction = -spawnPosition.transform.forward;//spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
         //direction.Normalize(); // direction vector normalized to magnitude 1
         Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
-        WaitForNextShot();
+        Reload();
     }
 
     public void OnCollisionEnter(Collision collision) {
         Destroy(this.gameObject);
         GameObject go = Instantiate(explosion, transform.position, transform.rotation);
         Destroy(go, 4);
+        StartRespawnTimer();
     }
+
+    private void StartRespawnTimer() {
+        StartCoroutine(_Respawn());
+    }
+
+    private IEnumerator _Respawn() {
+        yield return new WaitForSeconds(2f);
+        GameManager.Instance.CouchPlayerDied(this);
+        canvas.SetActive(true);
+    }
+
 }
