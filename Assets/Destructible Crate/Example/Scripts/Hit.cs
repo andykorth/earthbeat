@@ -8,7 +8,7 @@ public class Hit : MonoBehaviour {
 
 	
 	void OnCollisionEnter( Collision collision ) {
-		if( collision.relativeVelocity > 1.0) {
+		if( collision.relativeVelocity.magnitude > 1.0) {
 			DestroyIt();
 		}
 	}
