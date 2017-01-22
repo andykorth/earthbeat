@@ -34,7 +34,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1117296507973956}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -52,9 +52,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7ac2b1ccd3d4300bd60da33a57c0e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  couchPlayerPrefab: {fileID: 1709136670007658, guid: 1b95c87e84cf84183b66dca4ea211e5b,
+  couchPlayerPrefab: {fileID: 1127831504660898, guid: e3743a8144a954f448100da19e62e344,
     type: 2}
-  spawnPoint: {fileID: 0}
   maxPlayers: 4
   _VRPlayer: {fileID: 0}
 --- !u!114 &114847369410770262
