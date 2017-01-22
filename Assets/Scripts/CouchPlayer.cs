@@ -55,7 +55,7 @@ public class CouchPlayer : MonoBehaviour {
     }
 
     private IEnumerator _WaitForNextShot() {
-        yield return new WaitForSeconds(.45f);
+        yield return new WaitForSeconds(.35f);
         canShoot = true;
 
     }
@@ -91,8 +91,8 @@ public class CouchPlayer : MonoBehaviour {
 
     public void Fire() {
         canShoot = false;
-        Vector3 direction =  spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
-        direction.Normalize(); // direction vector normalized to magnitude 1
+        Vector3 direction = -spawnPosition.transform.forward;//spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
+        //direction.Normalize(); // direction vector normalized to magnitude 1
         Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
         WaitForNextShot();
     }
