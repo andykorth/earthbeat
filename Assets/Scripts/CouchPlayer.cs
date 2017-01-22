@@ -24,10 +24,17 @@ public class CouchPlayer : MonoBehaviour {
     private Quaternion baseRotation;
     private Camera cam;
     private float length;
+    private Camera trackingCamera;
+    private GameObject trackedObject;
+    private bool canShoot;
 
     public void SetupController(int playerNum) {
-        this.cam = this.transform.Find("Camera").GetComponent<Camera>();
-	    this.playerNum = playerNum;
+        this.playerNum = playerNum;
+        canShoot = true;
+        GameObject camObj = new GameObject("Camera_"+playerNum);
+        trackingCamera = camObj.AddComponent<Camera>();
+        trackedObject = this.transform.Find("TrackingCamera").gameObject;
+
 		player = ReInput.players.GetPlayer(playerNum);
 	    rb = this.GetComponent<Rigidbody>();
 
@@ -44,13 +51,28 @@ public class CouchPlayer : MonoBehaviour {
         SetCamera();
     }
 
-    private void SetCamera() {
-        this.cam.rect = GameManager.Instance.PlayerCamPositions[playerNum];
+    private void WaitForNextShot() {
+        StartCoroutine(_WaitForNextShot());
+    }
+
+    private IEnumerator _WaitForNextShot() {
+        yield return new WaitForSeconds(.45f);
+        canShoot = true;
+
     }
 
 
 
-	void FixedUpdate() {
+    private void SetCamera() {
+        this.trackingCamera.rect = GameManager.Instance.PlayerCamPositions[playerNum];
+//        this.trackingCamera.targetDisplay = GameManager.Instance.VRPlayer.transform.Find("[CameraRig]/Camera (head)")
+//                                                .GetComponent<Camera>()
+//                                                .targetDisplay + 1;
+    }
+
+
+
+    void FixedUpdate() {
 		// Physics / Motion updates are best suited for the Fixed Update loop
 		float moveHorizontal = player.GetAxis("Horiz") * (horizontalRotationSpeed) * Time.deltaTime;
 		float moveVertical = player.GetAxis("Vert") * (verticalRotationSpeed) * Time.deltaTime;
@@ -58,15 +80,12 @@ public class CouchPlayer : MonoBehaviour {
 
 	    bool fire = player.GetButtonDown("Fire");
 
-		if (fire) {
+		if (fire && canShoot) {
             Fire();
         }
 
-		transform.rotation = Quaternion.LookRotation(GameManager.Instance.VRPlayer.transform.position - this.transform.position);
-	    //rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -tilt);
-
-	    // Also, if we want physics interaction, we should be setting a rigid body's velocity, rather than modifying the
-		// position directly
+        Quaternion lookRot = Quaternion.LookRotation(GameManager.Instance.VRPlayer.transform.position - this.transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRot, Time.deltaTime * 2f);
 
 	    Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
 	    movement = transform.rotation * movement;
@@ -74,12 +93,16 @@ public class CouchPlayer : MonoBehaviour {
 	}
 
 	public void Update(){
-		// Visual effects run in the update loop.
+	    trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
+	    trackingCamera.transform.rotation = trackedObject.transform.rotation;
+	    // Visual effects run in the update loop.
 	}
 
     public void Fire() {
+        canShoot = false;
         Vector3 direction =  spawnPosition.transform.position - transform.position; //Get a direction vector to fire the bullet at.
         direction.Normalize(); // direction vector normalized to magnitude 1
-        Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(direction);
+        Instantiate(projectile, spawnPosition.transform.position, spawnPosition.transform.rotation).Fire(this.gameObject, direction);
+        WaitForNextShot();
     }
 }

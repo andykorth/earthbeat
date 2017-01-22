@@ -12,6 +12,7 @@ public class HeartRateMonitor : MonoBehaviour
 	public static UnityEvent heartbeatEvent;
 	public static int heartRate;
 	private static float timeSinceLastHeartbeat;
+	public static GameObject heartbeatSphere;
 	private static AudioSource heartbeatAudio;
 
 	void Start()
@@ -19,9 +20,8 @@ public class HeartRateMonitor : MonoBehaviour
 		heartRate = 60;
 		timeSinceLastHeartbeat = 0;
 
+		heartbeatSphere = (GameObject) Resources.Load("HeartbeatSphere");
 		heartbeatEvent = new UnityEvent();
-
-		GameObject gameObject = GameObject.FindGameObjectWithTag("HRM");
 		heartbeatAudio = gameObject.GetComponent<AudioSource>();
 	}
 	
@@ -52,5 +52,7 @@ public class HeartRateMonitor : MonoBehaviour
 	{
 		heartbeatEvent.Invoke();
 		heartbeatAudio.Play();
+		Instantiate(heartbeatSphere); // Instantiating here defeats the purpose
+									  // of broadcasting the heartbeat event!
 	}
 }
