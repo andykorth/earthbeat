@@ -408,6 +408,80 @@ ModelImporter:
     4300124: 3DGeom~104
     4300126: 3DGeom~105
     4300128: 3DGeom~106
+    6400000: 3DGeom~1
+    6400002: 3DGeom~100
+    6400004: 3DGeom~101
+    6400006: 3DGeom~102
+    6400008: 3DGeom~103
+    6400010: 3DGeom~104
+    6400012: 3DGeom~105
+    6400014: 3DGeom~106
+    6400016: 3DGeom~12
+    6400018: 3DGeom~13
+    6400020: 3DGeom~14
+    6400022: 3DGeom~15
+    6400024: 3DGeom~16
+    6400026: 3DGeom~17
+    6400028: 3DGeom~18
+    6400030: 3DGeom~19
+    6400032: 3DGeom~2
+    6400034: 3DGeom~20
+    6400036: 3DGeom~21
+    6400038: 3DGeom~22
+    6400040: 3DGeom~23
+    6400042: 3DGeom~24
+    6400044: 3DGeom~25
+    6400046: 3DGeom~3
+    6400048: 3DGeom~4
+    6400050: 3DGeom~43
+    6400052: 3DGeom~44
+    6400054: 3DGeom~45
+    6400056: 3DGeom~46
+    6400058: 3DGeom~47
+    6400060: 3DGeom~48
+    6400062: 3DGeom~49
+    6400064: 3DGeom~5
+    6400066: 3DGeom~50
+    6400068: 3DGeom~51
+    6400070: 3DGeom~6
+    6400072: 3DGeom~62
+    6400074: 3DGeom~63
+    6400076: 3DGeom~64
+    6400078: 3DGeom~65
+    6400080: 3DGeom~66
+    6400082: 3DGeom~67
+    6400084: 3DGeom~68
+    6400086: 3DGeom~69
+    6400088: 3DGeom~70
+    6400090: 3DGeom~71
+    6400092: 3DGeom~72
+    6400094: 3DGeom~73
+    6400096: 3DGeom~74
+    6400098: 3DGeom~75
+    6400100: 3DGeom~76
+    6400102: 3DGeom~77
+    6400104: 3DGeom~77_10
+    6400106: 3DGeom~77_2
+    6400108: 3DGeom~77_3
+    6400110: 3DGeom~77_4
+    6400112: 3DGeom~77_5
+    6400114: 3DGeom~77_6
+    6400116: 3DGeom~77_7
+    6400118: 3DGeom~77_8
+    6400120: 3DGeom~77_9
+    6400122: 3DGeom~87
+    6400124: 3DGeom~88
+    6400126: 3DGeom~89
+    6400128: 3DGeom~90
+    6400130: 3DGeom~91
+    6400132: 3DGeom~92
+    6400134: 3DGeom~93
+    6400136: 3DGeom~94
+    6400138: 3DGeom~95
+    6400140: 3DGeom~96
+    6400142: 3DGeom~97
+    6400144: 3DGeom~98
+    6400146: 3DGeom~99
   materials:
     importMaterials: 1
     materialName: 0
@@ -434,7 +508,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
