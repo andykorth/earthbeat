@@ -28,11 +28,6 @@ public class HeartRateMonitor : MonoBehaviour
 	// Counts up from the last heartbeat
 	void Update()
 	{
-		if (Input.GetKeyDown("up"))
-			ReceiveChangeOfRate(10);
-		if (Input.GetKeyDown("down"))
-			ReceiveChangeOfRate(-10);
-
 		timeSinceLastHeartbeat += Time.deltaTime;
 		if (timeSinceLastHeartbeat > 60.0/heartRate)
 		{
