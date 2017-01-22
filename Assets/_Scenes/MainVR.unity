@@ -528,7 +528,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &299378306
 MeshFilter:
@@ -1306,7 +1306,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 15
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &838970257
 MeshFilter:
@@ -1730,6 +1730,8 @@ MonoBehaviour:
   head: {fileID: 1496141329}
   leftStickyHand: {fileID: 1840583295}
   rightStickyHand: {fileID: 1034782109}
+  tongue: {fileID: 0}
+  tongueNode: {fileID: 0}
   headNode: {fileID: 2098502151}
   leftArmNode: {fileID: 1085003459}
   leftHandNode: {fileID: 1928407681}
