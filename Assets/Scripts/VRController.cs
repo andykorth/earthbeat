@@ -83,5 +83,7 @@ public class VRController : MonoBehaviour {
 		handModelTransform.localScale = new Vector3 (10f, 10f, 10f);
 		isEnlarged = true;
 		enlargedTime = Time.time;
+
+		AudioManager.i.PlaySlap ();
 	}
 }

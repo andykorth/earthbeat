@@ -394,6 +394,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 73332ae6ec1d2449a8974238cefe625b, type: 3}
   - {fileID: 8300000, guid: f226a87d5695d4e0ba520b3f39c55987, type: 3}
   - {fileID: 8300000, guid: 34abcdab79f3a42628df7459d7eeb91e, type: 3}
+  monsters:
+  - {fileID: 8300000, guid: 275a4b0dd5b4743cb9aed1fb7498ac98, type: 3}
+  - {fileID: 8300000, guid: b49dd34cd1ea0423b830014e544443b8, type: 3}
+  - {fileID: 8300000, guid: 1762c36cbbd1b42589cc45b75aaeeff1, type: 3}
+  - {fileID: 8300000, guid: a5fe2cdf5488f41c6ada6af85b4d4ffb, type: 3}
 --- !u!114 &114963049531227436
 MonoBehaviour:
   m_ObjectHideFlags: 1
