@@ -31,8 +31,8 @@ public class CouchPlayer : MonoBehaviour {
     public void SetupController(int playerNum) {
         this.playerNum = playerNum;
         canShoot = true;
-        GameObject camObj = new GameObject("Camera_"+playerNum);
-        trackingCamera = camObj.AddComponent<Camera>();
+        trackingCamera = GameObject.Find("Camera" + (playerNum + 1)).GetComponent<Camera>();
+        trackingCamera.transform.Find("BGCanvas-PressStartToJoin").gameObject.SetActive(false);
         trackedObject = this.transform.Find("TrackingCamera").gameObject;
 
 		player = ReInput.players.GetPlayer(playerNum);
@@ -48,7 +48,6 @@ public class CouchPlayer : MonoBehaviour {
 			Debug.Log ("PlayerID: " + playerNum + " ready to fly! Name: " + player.name);
 		}
 
-        SetCamera();
     }
 
     private void WaitForNextShot() {
@@ -60,16 +59,6 @@ public class CouchPlayer : MonoBehaviour {
         canShoot = true;
 
     }
-
-
-
-    private void SetCamera() {
-        this.trackingCamera.rect = GameManager.Instance.PlayerCamPositions[playerNum];
-//        this.trackingCamera.targetDisplay = GameManager.Instance.VRPlayer.transform.Find("[CameraRig]/Camera (head)")
-//                                                .GetComponent<Camera>()
-//                                                .targetDisplay + 1;
-    }
-
 
 
     void FixedUpdate() {
@@ -90,11 +79,13 @@ public class CouchPlayer : MonoBehaviour {
 	    Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
 	    movement = transform.rotation * movement;
 	    rb.velocity = movement * planeCurrentSpeed;
-	}
+
+        trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
+        trackingCamera.transform.rotation = trackedObject.transform.rotation;
+    }
 
 	public void Update(){
-	    trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
-	    trackingCamera.transform.rotation = trackedObject.transform.rotation;
+
 	    // Visual effects run in the update loop.
 	}
 
