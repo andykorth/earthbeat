@@ -25,16 +25,23 @@ public class Soundtrack : Script {
 	}
 
 	public void PlayNextTrack() {
-		int current = currentTrack;
-		int nextTrack = currentTrack + 1;
+		//int current = currentTrack;
+		int nextTrack;
+
+		while ((nextTrack = Random.Range (0, audioSources.Length)) == currentTrack)
+			;
+		
 
 		audioSources[nextTrack].Play();
+		currentTrack = nextTrack;
 
+		/*
 		var c = AddAnimation (CROSSFADETIME, (a) => {
 			audioSources[current].volume = 1-a;
 			audioSources[nextTrack].volume = a;
 		});
 		AddDelayed (c, () => audioSources [current].Stop ());
+		*/
 	}
 
 
