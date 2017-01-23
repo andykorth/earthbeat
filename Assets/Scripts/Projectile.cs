@@ -32,6 +32,7 @@ public class Projectile : MonoBehaviour {
 
     public void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.GetInstanceID() != sender.GetInstanceID()) {
+			AudioManager.i.PlaySmallExplosion ();
             Destroy(this.gameObject);
             GameObject exposionInst = Instantiate(explosion, transform.position, transform.rotation);
             Destroy(exposionInst, 1);
@@ -43,6 +44,9 @@ public class Projectile : MonoBehaviour {
 	public void OnTriggerEnter(Collider other) {
 		if (other.tag == "Polyp") {
 			// We hit the big bad guy!
+
+			AudioManager.i.PlaySmallExplosion ();
+			AudioManager.i.PlayMonster ();
 			Destroy(this.gameObject);
 			GameObject exposionInst = Instantiate(explosion, transform.position, transform.rotation);
 			Destroy(exposionInst, 1);

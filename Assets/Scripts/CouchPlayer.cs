@@ -171,7 +171,7 @@ public class CouchPlayer : MonoBehaviour {
     public void OnCollisionEnter(Collision collision) {
         if (dead || invincible) return;
         GameObject go = Instantiate(explosion, transform.position, transform.rotation);
-		AudioManager.i.PlayExplosion ();
+		AudioManager.i.PlayLargeExplosion ();
         Destroy(go, 4);
 		rollTransform.gameObject.SetActive(false);
         StartRespawnTimer();

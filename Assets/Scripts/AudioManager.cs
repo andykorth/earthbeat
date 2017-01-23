@@ -8,7 +8,8 @@ public class AudioManager : SingletonScript<AudioManager> {
 	public AudioClip[] slaps;
 	public AudioClip[] swoops;
 	public AudioClip[] monsters;
-	public AudioClip[] explosions;
+	public AudioClip[] largeExplosions;
+	public AudioClip[] smallExplosions;
 	public AudioClip playerStart;
 	public AudioClip playerLanded;
 
@@ -21,8 +22,11 @@ public class AudioManager : SingletonScript<AudioManager> {
 	public void PlaySlap(){
 		PlayRandom (slaps);
 	}
-	public void PlayExplosion(){
-		PlayRandom (explosions, 1.5f);
+	public void PlayLargeExplosion(){
+		PlayRandom (largeExplosions, 1.5f);
+	}
+	public void PlaySmallExplosion(){
+		PlayRandom (smallExplosions, Random.Range(0.4f, 1.2f), Random.Range(0.5f, 1.1f));
 	}
 
 	public void PlayRandom(AudioClip[] all, float pitchBend = 1.0f, float vol = 1.0f){
