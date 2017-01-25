@@ -2488,12 +2488,12 @@ Prefab:
     - target: {fileID: 114963049531227436, guid: 576db3bb0680546f8befe94f07c87ef9,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114369913648588912, guid: 576db3bb0680546f8befe94f07c87ef9,
         type: 2}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 576db3bb0680546f8befe94f07c87ef9, type: 2}
