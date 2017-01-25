@@ -37,7 +37,7 @@ public class CouchPlayer : MonoBehaviour {
     private GameObject trackedObject;
     private bool canShoot;
     private GameObject canvas;
-    private float SHOOT_TIMER = 0.25f;
+    private float SHOOT_TIMER = 1f;
     private float RELOAD_TIMER = 1.75f;
     public int shotChamber = 6;
     private readonly int MAX_SHOTS = 6;
@@ -55,12 +55,13 @@ public class CouchPlayer : MonoBehaviour {
     private float DASH_COOLDOWN_TIMER = 0.75f;
     private bool canDash = true;
     private bool dashed;
-    private int DEFAULT_DASH_MODIFIER = 10;
-    private int dashModifier = 10;
+    private float DEFAULT_DASH_MODIFIER = 16.0f;
+    private float dashModifier;
     private float DASH_TIMER = 0.25f;
 
 
     public void SetupController(int playerNum) {
+        dashModifier = DEFAULT_DASH_MODIFIER;
         dead = false;
         invincible = true;
         this.playerNum = playerNum;
@@ -120,13 +121,16 @@ public class CouchPlayer : MonoBehaviour {
 
         Vector3 movement = new Vector3 (moveHorizontal, rightMoveVertical,  moveVertical);
 	    movement = transform.rotation * movement;
-	    rb.velocity = movement * planeCurrentSpeed * (dashed ? Mathf.Max(dashModifier--, 1) : 1);
+	    rb.velocity = movement * planeCurrentSpeed * (dashed ? Mathf.Max(dashModifier -= 1.5f, 1.0f) : 1.0f);
         trackingCamera.transform.position = Vector3.Lerp(trackingCamera.transform.position, trackedObject.transform.position, Time.deltaTime * 7);
         trackingCamera.transform.rotation = trackedObject.transform.rotation;
 
 		// Adjust the roll of the ship just for visual fun:
 		roll = Util.ConstantLerp(roll, player.GetAxis("Horiz") * 30.0f, Time.deltaTime * 100.0f);
 		rollTransform.localRotation = Quaternion.Euler(0f, 180f, roll);
+        if (player.GetAxis("Vert") == 0) {
+           rollTransform.position = new Vector3(rollTransform.position.x, rollTransform.position.y + (Mathf.Sin(Time.time * 2f)/500), rollTransform.position.z);
+       }
     }
 	private float roll = 0f;
 
@@ -170,6 +174,7 @@ public class CouchPlayer : MonoBehaviour {
 
     public void OnCollisionEnter(Collision collision) {
         if (dead || invincible) return;
+        Debug.Log(collision.gameObject);
         GameObject go = Instantiate(explosion, transform.position, transform.rotation);
 		AudioManager.i.PlayLargeExplosion ();
         Destroy(go, 4);

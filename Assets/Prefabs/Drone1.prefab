@@ -159,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 1464371897316270}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 115, y: 115, z: 115}
   m_Children:
   - {fileID: 4635465330195142}
   - {fileID: 4967065808410472}
@@ -289,7 +289,7 @@ TrailRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1338922287909846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_MotionVectors: 1
@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
-  projectile: {fileID: 1147122076980468, guid: 1e7c6c434c1e64a20adefb3e15c46246, type: 2}
+  projectile: {fileID: 1685654139491418, guid: 1e7c6c434c1e64a20adefb3e15c46246, type: 2}
   playerNum: 0
   spawnPosition1: {fileID: 1140393089050772}
   spawnPosition2: {fileID: 1325609482791084}

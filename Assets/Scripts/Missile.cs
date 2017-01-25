@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Missile : MonoBehaviour {
-	void Update () {
-	    transform.RotateAround(transform.parent.forward, Time.deltaTime * 4);
+	void FixedUpdate () {
+        transform.RotateAround (transform.position, transform.parent.forward, 5f);
 	}
 }

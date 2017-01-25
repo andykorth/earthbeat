@@ -403,7 +403,7 @@ Transform:
   m_GameObject: {fileID: 1262046943046332}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
   m_Children:
   - {fileID: 4055312771071904}
   - {fileID: 4047879706954208}
@@ -970,7 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dead: 0
-  projectile: {fileID: 1147122076980468, guid: 1e7c6c434c1e64a20adefb3e15c46246, type: 2}
+  projectile: {fileID: 1685654139491418, guid: 1e7c6c434c1e64a20adefb3e15c46246, type: 2}
   playerNum: 0
   spawnPosition1: {fileID: 1054323704251096}
   spawnPosition2: {fileID: 1011234659420716}
