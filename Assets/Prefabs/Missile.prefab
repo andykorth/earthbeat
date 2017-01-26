@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
-  explosion: {fileID: 1000013462590818, guid: f6eee6861ccaf4b7ea66169fac6a12e0, type: 2}
+  explosion: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 2}
 --- !u!198 &198964658274572050
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -230,7 +230,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1499405996292418}
   serializedVersion: 5
-  lengthInSec: 1
+  lengthInSec: 0.15
   simulationSpeed: 1
   looping: 1
   prewarm: 0
@@ -278,7 +278,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1923540520
+  randomSeed: 174746869
   InitialModule:
     serializedVersion: 3
     enabled: 1
