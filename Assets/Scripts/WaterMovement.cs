@@ -18,7 +18,6 @@ public class WaterMovement : MonoBehaviour {
 
 	    var y = Mathf.Lerp(transform.position.y, transform.position.y + Mathf.Sin(Time.time)/4, Time.deltaTime);
 	    var tidePos = new Vector3(transform.position.x, y, transform.position.z);
-	    Debug.Log(tidePos);
 	    transform.position = tidePos;
 	}
 }
