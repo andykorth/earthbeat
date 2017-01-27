@@ -12,11 +12,11 @@ public class WaterMovement : MonoBehaviour {
 	void Update () {
 	    var offset = _renderer.material.mainTextureOffset;
 	    _renderer.material.mainTextureOffset = new Vector2(
-	        Mathf.Lerp(offset.x, offset.x + 0.002f, Time.time),
+	        Mathf.Lerp(offset.x, offset.x + 0.001f/2, Time.time),
 	        0f
 	    );
 
-	    var y = Mathf.Lerp(transform.position.y, transform.position.y + Mathf.Sin(Time.time)/4, Time.deltaTime);
+	    var y = Mathf.Lerp(transform.position.y, transform.position.y + Mathf.Sin(Time.time)/10, Time.deltaTime/2);
 	    var tidePos = new Vector3(transform.position.x, y, transform.position.z);
 	    transform.position = tidePos;
 	}
