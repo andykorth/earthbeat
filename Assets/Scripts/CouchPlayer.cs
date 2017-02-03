@@ -85,7 +85,15 @@ public class CouchPlayer : MonoBehaviour {
 		} else {
 			Debug.Log ("PlayerID: " + playerNum + " ready to fly! Name: " + player.name);
 		}
+        StartCoroutine(UpdateShootSpeed());
+    }
 
+    private IEnumerator UpdateShootSpeed() {
+        while (!dead) {
+            //increase timer by .5 sec with each additional player
+            SHOOT_TIMER = (ReInput.players.playerCount - 1) * 0.5f + 1;
+            yield return new WaitForSeconds(2);
+        }
     }
 
 	public void SetColor(Color c){
